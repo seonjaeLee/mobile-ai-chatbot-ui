@@ -297,7 +297,7 @@ export function ScreenChat({
             <ArrowUp className="h-5 w-5" strokeWidth={2.4} />
           </Tappable>
         </motion.div>
-        <p className="mt-3 text-center text-[12px] text-ink-sub">
+        <p className="mb-1 mt-3 text-center text-[12px] text-ink-sub">
           AI는 실수할 수 있어요. 내용을 한 번 더 확인해 주세요.
         </p>
       </div>
