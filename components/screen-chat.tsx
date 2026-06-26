@@ -298,7 +298,7 @@ export function ScreenChat({
           </Tappable>
         </motion.div>
         <p className="mt-3 text-center text-[12px] text-ink-sub">
-          투자 결정은 천천히, 신중하게
+          AI는 실수할 수 있어요. 내용을 한 번 더 확인해 주세요.
         </p>
       </div>
     </div>
