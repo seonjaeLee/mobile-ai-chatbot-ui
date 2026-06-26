@@ -36,7 +36,7 @@ export function ScreenHome({
         >
           <ArrowLeft className="h-[22px] w-[22px]" strokeWidth={2} />
         </Tappable>
-        <h1 className="text-[15px] font-medium text-ink">삼성증권mPOP AI상담사</h1>
+        <h1 className="text-[15px] font-medium text-ink">삼성증권mPOP AI챗봇</h1>
       </header>
 
       {/* 중앙 영역 */}
