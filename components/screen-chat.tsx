@@ -63,7 +63,22 @@ export function ScreenChat({
   const [typed, setTyped] = useState('')
   const [value, setValue] = useState('')
   const [focused, setFocused] = useState(false)
+  const [scrolling, setScrolling] = useState(false)
   const scrollRef = useRef<HTMLDivElement>(null)
+  const scrollHideTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  // 스크롤이 멈추면 700ms 후 스크롤바를 페이드 아웃
+  const handleScroll = () => {
+    setScrolling(true)
+    if (scrollHideTimer.current) clearTimeout(scrollHideTimer.current)
+    scrollHideTimer.current = setTimeout(() => setScrolling(false), 700)
+  }
+
+  useEffect(() => {
+    return () => {
+      if (scrollHideTimer.current) clearTimeout(scrollHideTimer.current)
+    }
+  }, [])
 
   // 단계 진행: 타이핑 인디케이터 → 본문 글자 스트리밍 → 나머지 블록
   useEffect(() => {
@@ -127,7 +142,10 @@ export function ScreenChat({
       {/* 대화 스크롤 영역 */}
       <div
         ref={scrollRef}
-        className="relative flex-1 space-y-5 overflow-y-auto px-4 py-4"
+        onScroll={handleScroll}
+        className={`mobile-scroll relative flex-1 space-y-5 overflow-y-auto px-4 py-4 ${
+          scrolling ? 'is-scrolling' : ''
+        }`}
       >
         {/* 사용자 발화 */}
         <motion.div

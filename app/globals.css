@@ -181,3 +181,28 @@
     @apply font-sans;
   }
 }
+
+/* 모바일식 오버레이 스크롤바: 스크롤 중에만 나타나고 멈추면 페이드 아웃 */
+.mobile-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+  transition: scrollbar-color 0.4s ease;
+}
+.mobile-scroll.is-scrolling {
+  scrollbar-color: rgba(35, 33, 54, 0.28) transparent;
+}
+.mobile-scroll::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+.mobile-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.mobile-scroll::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 9999px;
+  transition: background 0.4s ease;
+}
+.mobile-scroll.is-scrolling::-webkit-scrollbar-thumb {
+  background: rgba(35, 33, 54, 0.28);
+}
