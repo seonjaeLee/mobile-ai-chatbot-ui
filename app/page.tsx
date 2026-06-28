@@ -12,7 +12,7 @@ export default function Page() {
         </h1>
         <p className="mt-2 text-pretty text-sm leading-relaxed text-ink-sub">
           진입 → 대화(답변 스트리밍) → 전체메뉴(드래그)까지 실제로 조작해 볼 수
-          있는 모바일 시안 · 라이트 모드
+          있는 모바일 시안
         </p>
       </header>
 
