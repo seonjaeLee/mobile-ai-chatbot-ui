@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { X, LayoutGrid, Mic, ArrowUp } from 'lucide-react'
+import { X, LayoutGrid, Mic, ArrowUp, ChevronUp } from 'lucide-react'
 import { Tappable } from './tappable'
 
 
@@ -77,8 +77,7 @@ export function ScreenHome({
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ type: 'spring', stiffness: 300, damping: 30, delay: 0.25 }}
-        className="shrink-0 px-6 pb-8"
-        style={{ paddingBottom: 'calc(2rem + env(safe-area-inset-bottom, 0px))' }}
+        className="shrink-0 px-6 pb-4"
       >
         <motion.div
           animate={{
@@ -137,6 +136,21 @@ export function ScreenHome({
           </div>
         </motion.div>
       </motion.div>
+
+      {/* 하단 챗봇 메뉴 트리거 */}
+      <div
+        className="flex shrink-0 items-center justify-center py-4"
+        style={{ paddingBottom: 'calc(1rem + env(safe-area-inset-bottom, 0px))' }}
+      >
+        <Tappable
+          type="button"
+          onClick={onOpenMenu}
+          className="flex items-center gap-1.5 rounded-full px-4 py-2 text-[15px] font-medium text-ink-sub transition-colors hover:text-ink"
+        >
+          <ChevronUp className="h-4 w-4" strokeWidth={2} />
+          챗봇 메뉴
+        </Tappable>
+      </div>
     </div>
   )
 }
