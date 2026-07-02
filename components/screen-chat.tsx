@@ -384,7 +384,7 @@ export function ScreenChat({
                           transition={{ duration: 0.2 }}
                           className="relative flex-[2] rounded-2xl py-3.5 text-[15px] font-semibold shadow-sm disabled:cursor-not-allowed"
                         >
-                          {/* 텍스트는 항상 중앙 고정 */}
+                          {/* 텍스트는 ��상 중앙 고정 */}
                           <span className="flex items-center justify-center">매수 · 실행</span>
                           {/* 체크는 절대위치 우측 */}
                           <AnimatePresence>
@@ -487,70 +487,63 @@ export function ScreenChat({
       </div>
 
       {/* ── 하단 입력 영역 ── */}
-      {/* 하단 입력 영역 — 2행 카드 */}
-      <div
-        className="relative shrink-0 px-4 pt-2"
-        style={{ paddingBottom: 'calc(1.25rem + env(safe-area-inset-bottom, 0px))' }}
+      {/* 하단 입력 영역 — 상단만 둥근 바텀시트 */}
+      <motion.div
+        animate={{
+          borderColor: focused ? 'rgba(110,93,231,0.4)' : 'rgba(236,235,242,1)',
+        }}
+        className="shrink-0 rounded-t-3xl border-x border-t bg-white/95 shadow-[0_-8px_32px_-8px_rgba(35,33,54,0.12)] backdrop-blur"
+        style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
       >
-        <motion.div
-          animate={{
-            borderColor: focused ? 'rgba(110,93,231,0.55)' : 'rgba(236,235,242,1)',
-            boxShadow: focused
-              ? '0 12px 34px -14px rgba(110,93,231,0.35)'
-              : '0 10px 30px -14px rgba(35,33,54,0.18)',
-          }}
-          className="rounded-3xl border bg-white/85 backdrop-blur"
-        >
-          {/* 1행: 텍스트 입력 */}
-          <div className="px-4 pt-4">
-            <input
-              type="text"
-              value={value}
-              onChange={(e) => setValue(e.target.value)}
-              onFocus={() => setFocused(true)}
-              onBlur={() => setFocused(false)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' && !e.nativeEvent.isComposing) {
-                  e.preventDefault()
-                  send()
-                }
-              }}
-              placeholder="필요한 업무를 입력해주세요"
-              className="w-full bg-transparent text-[16px] text-ink outline-none placeholder:text-ink-sub"
-            />
-          </div>
-          {/* 2행: 버튼 영역 */}
-          <div className="flex items-center justify-between px-3 pb-3 pt-2">
+        {/* 1행: 텍스트 입력 */}
+        <div className="px-5 pt-5">
+          <input
+            type="text"
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+            onFocus={() => setFocused(true)}
+            onBlur={() => setFocused(false)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && !e.nativeEvent.isComposing) {
+                e.preventDefault()
+                send()
+              }
+            }}
+            placeholder="필요한 업무를 입력해주세요"
+            className="w-full bg-transparent text-[16px] text-ink outline-none placeholder:text-ink-sub"
+          />
+        </div>
+        {/* 2행: 버튼 영역 */}
+        <div className="flex items-center justify-between px-4 pb-4 pt-3">
+          <Tappable
+            type="button"
+            aria-label="챗봇 메뉴"
+            onClick={onOpenMenu}
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-ink-sub hover:bg-black/5"
+          >
+            <LayoutGrid className="h-5 w-5" strokeWidth={1.8} />
+          </Tappable>
+          <div className="flex items-center gap-2">
             <Tappable
               type="button"
-              aria-label="챗봇 메뉴"
-              onClick={onOpenMenu}
+              aria-label="음성 입력"
               className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-ink-sub hover:bg-black/5"
             >
-              <LayoutGrid className="h-5 w-5" strokeWidth={1.8} />
+              <Mic className="h-5 w-5" strokeWidth={1.8} />
             </Tappable>
-            <div className="flex items-center gap-2">
-              <Tappable
-                type="button"
-                aria-label="음성 입력"
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-ink-sub hover:bg-black/5"
-              >
-                <Mic className="h-5 w-5" strokeWidth={1.8} />
-              </Tappable>
-              <motion.button
-                type="button"
-                aria-label="전송"
-                onClick={send}
-                whileTap={{ scale: 0.88 }}
-                disabled={!value.trim()}
-                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-violet text-white shadow-sm hover:opacity-90 disabled:opacity-30"
-              >
-                <ArrowUp className="h-5 w-5" strokeWidth={2.4} />
-              </motion.button>
-            </div>
+            <motion.button
+              type="button"
+              aria-label="전송"
+              onClick={send}
+              whileTap={{ scale: 0.88 }}
+              disabled={!value.trim()}
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-violet text-white shadow-sm hover:opacity-90 disabled:opacity-30"
+            >
+              <ArrowUp className="h-5 w-5" strokeWidth={2.4} />
+            </motion.button>
           </div>
-        </motion.div>
-      </div>
+        </div>
+      </motion.div>
     </div>
   )
 }
