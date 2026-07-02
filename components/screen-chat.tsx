@@ -249,20 +249,23 @@ export function ScreenChat({
                           : { backgroundColor: 'rgb(236,235,242)', color: 'rgb(83,82,101)' }
                       }
                       transition={{ duration: 0.2 }}
-                      className="flex w-full items-center justify-center gap-2 rounded-2xl py-3.5 text-[16px] font-semibold disabled:cursor-not-allowed"
+                      className="relative w-full rounded-2xl py-3.5 text-[16px] font-semibold disabled:cursor-not-allowed"
                     >
-                      매수가격 선택
-                      <AnimatePresence mode="wait">
-                        {priceConfirmed ? (
+                      {/* 텍스트는 항상 중앙 고정 */}
+                      <span className="flex items-center justify-center">매수가격 선택</span>
+                      {/* 체크는 절대위치 우측 — 텍스트 위치에 영향 없음 */}
+                      <AnimatePresence>
+                        {priceConfirmed && (
                           <motion.span
                             key="checked"
                             initial={{ scale: 0, opacity: 0 }}
                             animate={{ scale: 1, opacity: 1 }}
                             transition={{ type: 'spring', stiffness: 400, damping: 22 }}
+                            className="absolute right-4 top-1/2 -translate-y-1/2"
                           >
                             <Check className="h-4 w-4" strokeWidth={2.5} />
                           </motion.span>
-                        ) : null}
+                        )}
                       </AnimatePresence>
                     </motion.button>
                   </div>
@@ -351,16 +354,19 @@ export function ScreenChat({
                               : { backgroundColor: 'rgb(110,93,231)', color: '#ffffff' }
                           }
                           transition={{ duration: 0.2 }}
-                          className="flex flex-[2] items-center justify-center gap-2 rounded-2xl py-3.5 text-[15px] font-semibold shadow-sm disabled:cursor-not-allowed"
+                          className="relative flex-[2] rounded-2xl py-3.5 text-[15px] font-semibold shadow-sm disabled:cursor-not-allowed"
                         >
-                          매수 · 실행
-                          <AnimatePresence mode="wait">
+                          {/* 텍스트는 항상 중앙 고정 */}
+                          <span className="flex items-center justify-center">매수 · 실행</span>
+                          {/* 체크는 절대위치 우측 */}
+                          <AnimatePresence>
                             {orderExecuted && (
                               <motion.span
                                 key="exec-check"
                                 initial={{ scale: 0, opacity: 0 }}
                                 animate={{ scale: 1, opacity: 1 }}
                                 transition={{ type: 'spring', stiffness: 400, damping: 22 }}
+                                className="absolute right-4 top-1/2 -translate-y-1/2"
                               >
                                 <Check className="h-4 w-4" strokeWidth={2.5} />
                               </motion.span>
