@@ -46,7 +46,10 @@ export function Prototype() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.18 }}
-            className="fixed left-0 right-0 top-0 z-50 flex h-14 shrink-0 items-center justify-center border-b border-line/20 bg-white/90 px-4 backdrop-blur-md"
+            className="fixed left-0 right-0 top-0 z-50 flex h-14 shrink-0 items-center justify-center border-b border-line/20 bg-white/60 px-4 backdrop-blur-xl"
+            style={{
+              boxShadow: 'inset 0 -1px 0 rgba(0,0,0,0.05), 0 8px 16px -8px rgba(0,0,0,0.08)',
+            }}
           >
             <Tappable
               type="button"

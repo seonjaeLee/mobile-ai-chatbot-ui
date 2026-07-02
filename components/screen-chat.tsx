@@ -154,6 +154,14 @@ export function ScreenChat({
 
   return (
     <div className="relative flex h-full flex-col pt-14">{/* 배경은 prototype.tsx에서 공유, pt-14로 fixed 헤더 여백 확보 */}
+      {/* 헤더 아래 그래디언트 마스킹: 스크롤 콘텐츠가 지나갈 때 블러 효과 */}
+      <div
+        className="pointer-events-none absolute left-0 right-0 top-0 z-40 h-14 bg-gradient-to-b from-white/80 to-transparent backdrop-blur-sm"
+        style={{
+          background: 'linear-gradient(to bottom, rgba(255,255,255,0.85), rgba(255,255,255,0))',
+          backdropFilter: 'blur(8px)',
+        }}
+      />
 
       {/* ── 스크롤 대화 영역: pb로 입력창까지 스크롤 가능하게 ── */}
       <div
