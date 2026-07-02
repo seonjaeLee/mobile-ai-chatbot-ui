@@ -578,10 +578,14 @@ function AIBadge() {
       transition={{ duration: 0.2 }}
       className="flex items-center gap-1.5"
     >
-      <span className="flex h-5 w-5 items-center justify-center rounded-full bg-violet/10">
-        <Sparkles className="h-3 w-3 text-violet" strokeWidth={2.2} />
+      {/* 삼성 네이비 썸네일 */}
+      <span
+        className="flex h-6 w-6 items-center justify-center rounded-full"
+        style={{ background: '#034EA2' }}
+      >
+        <Sparkles className="h-3.5 w-3.5 text-white" strokeWidth={2.2} />
       </span>
-      <span className="text-[13px] font-semibold text-violet">AI상담사</span>
+      <span className="text-[13px] font-semibold" style={{ color: '#034EA2' }}>AI 상담사</span>
     </motion.div>
   )
 }
@@ -592,7 +596,8 @@ function TypingDots() {
       {[0, 1, 2].map((i) => (
         <motion.span
           key={i}
-          className="h-2 w-2 rounded-full bg-violet/40"
+          className="h-2 w-2 rounded-full"
+          style={{ backgroundColor: 'rgba(3,78,162,0.35)' }}
           animate={{ opacity: [0.3, 1, 0.3], y: [0, -3, 0] }}
           transition={{ duration: 0.9, repeat: Infinity, delay: i * 0.15 }}
         />
