@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useCallback } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, LayoutGroup, motion } from 'framer-motion'
 import { ArrowLeft, Signal, Wifi, BatteryFull } from 'lucide-react'
 import { ScreenHome } from './screen-home'
 import { ScreenChat } from './screen-chat'
@@ -61,7 +61,8 @@ export function Prototype() {
       </AnimatePresence>
 
       {/* ── 화면 전환 영역 ── */}
-      {/* home/chat 동시 마운트 → layoutId가 두 화면 간에 작동 */}
+      {/* LayoutGroup: home/chat 동시 마운트 → layoutId가 두 화면 간에 작동 */}
+      <LayoutGroup>
       <div className="absolute inset-0">
         {/* 홈 화면 — chat 전환 시 fade out */}
         <motion.div
@@ -92,6 +93,7 @@ export function Prototype() {
           />
         </motion.div>
       </div>
+      </LayoutGroup>
 
       <MenuSheet
         open={menuOpen}
