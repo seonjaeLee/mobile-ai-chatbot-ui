@@ -146,7 +146,7 @@ export function Prototype() {
 
 function StatusBar() {
   return (
-    <div className="flex h-[54px] items-end justify-between px-7 pb-2 text-ink">
+    <div className="flex h-[54px] items-end justify-between px-7 pb-2 text-white">
       <span className="text-[15px] font-semibold tracking-tight">9:41</span>
       <div className="flex items-center gap-1.5">
         <Signal className="h-[15px] w-[15px]" strokeWidth={2.5} />
