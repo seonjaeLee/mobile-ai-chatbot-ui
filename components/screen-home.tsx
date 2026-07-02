@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { X, LayoutGrid, Mic, ArrowUp, ChevronUp } from 'lucide-react'
-import { AuroraBg } from './aurora-bg'
 import { Tappable } from './tappable'
 
 
@@ -26,8 +25,7 @@ export function ScreenHome({
   }
 
   return (
-    <div className="relative flex h-full flex-col">
-      <AuroraBg />
+    <div className="relative flex h-full flex-col">{/* 배경은 prototype.tsx에서 공유 */}
 
       {/* 상단 바 */}
       <header className="relative flex h-14 items-center justify-center px-4">

@@ -11,7 +11,6 @@ import {
   ChevronUp,
   ChevronDown,
 } from 'lucide-react'
-import { AuroraBg } from './aurora-bg'
 import { Tappable } from './tappable'
 
 // ── 데이터 ─────────────────────────────────────────────────────
@@ -146,8 +145,7 @@ export function ScreenChat({
   const totalAmount = (selectedPrice ?? BASE_PRICE) * QTY
 
   return (
-    <div className="relative flex h-full flex-col">
-      <AuroraBg className="opacity-70" />
+    <div className="relative flex h-full flex-col">{/* 배경은 prototype.tsx에서 공유 */}
 
       {/* ── 스크롤 대화 영역: pt-14로 헤더 아래 시작 ── */}
       <div
