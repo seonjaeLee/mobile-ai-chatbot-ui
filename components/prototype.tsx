@@ -64,7 +64,7 @@ export function Prototype() {
       {/* ── 화면 전환 영역 ── */}
       {/* LayoutGroup: home/chat 동시 마운트 → layoutId가 두 화면 간에 작동 */}
       <LayoutGroup>
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 overflow-hidden">
         {/* 홈 화면 — chat 전환 시 fade out */}
         <motion.div
           animate={{ opacity: screen === 'home' ? 1 : 0, pointerEvents: screen === 'home' ? 'auto' : 'none' }}
@@ -125,7 +125,7 @@ export function Prototype() {
             <StatusBar />
             <div
               className="relative w-full overflow-hidden"
-              style={{ height: SCREEN_H }}
+              style={{ height: SCREEN_H, contain: 'strict' }}
             >
               {content(false)}
             </div>

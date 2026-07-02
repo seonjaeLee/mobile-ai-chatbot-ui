@@ -49,7 +49,7 @@ export function ScreenHome({
           hidden: {},
           show: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } },
         }}
-        className="relative flex flex-1 flex-col items-center justify-center px-6"
+        className="relative flex flex-1 flex-col items-center justify-center overflow-hidden px-6"
       >
         {/* 텍스트 그룹 — isExiting 시 위로 fade out */}
         <motion.div
@@ -71,7 +71,7 @@ export function ScreenHome({
           </motion.h2>
           <motion.p
             variants={fadeUp}
-            className="mb-9 text-[15px] text-ink-sub"
+            className="mb-7 text-[15px] text-ink-sub"
           >
             AI 상담사에게 자유롭게 물어보세요.
           </motion.p>
@@ -142,8 +142,7 @@ export function ScreenHome({
 
       {/* 하단 챗봇 메뉴 트리거 */}
       <div
-        className="flex shrink-0 items-center justify-center py-4"
-        style={{ paddingBottom: 'calc(1rem + env(safe-area-inset-bottom, 0px))' }}
+        className="flex shrink-0 items-center justify-center pb-6 pt-3"
       >
         <Tappable
           type="button"
