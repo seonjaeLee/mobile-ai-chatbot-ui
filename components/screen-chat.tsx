@@ -136,7 +136,7 @@ export function ScreenChat({
         >
           <ArrowLeft className="h-[22px] w-[22px]" strokeWidth={2} />
         </Tappable>
-        <h1 className="text-[15px] font-medium text-ink">삼성증권mPOP AI챗봇</h1>
+        <h1 className="text-[17px] font-semibold text-ink">삼성증권mPOP AI챗봇</h1>
       </header>
 
       {/* 대화 스크롤 영역 */}
@@ -154,7 +154,7 @@ export function ScreenChat({
           transition={{ type: 'spring', stiffness: 360, damping: 30 }}
           className="flex justify-end"
         >
-          <p className="max-w-[78%] text-pretty text-right text-[15px] font-medium leading-relaxed text-ink">
+          <p className="max-w-[78%] text-pretty text-right text-[16px] font-medium leading-relaxed text-ink">
             &ldquo;{question}&rdquo;
           </p>
         </motion.div>
@@ -169,14 +169,14 @@ export function ScreenChat({
             <span className="flex h-5 w-5 items-center justify-center rounded-full bg-violet/10">
               <Sparkles className="h-3 w-3 text-violet" strokeWidth={2.2} />
             </span>
-            <span className="text-[12px] font-medium text-violet">AI상담사</span>
+            <span className="text-[13px] font-semibold text-violet">AI상담사</span>
           </motion.div>
 
           <div className="rounded-3xl rounded-tl-md border border-white/60 bg-white/80 p-4 shadow-[0_12px_30px_-14px_rgba(35,33,54,0.22)] backdrop-blur">
             {stage === 0 ? (
               <TypingDots />
             ) : (
-              <p className="text-[15px] leading-relaxed text-ink">
+              <p className="text-[16px] leading-relaxed text-ink">
                 {typed}
                 {stage === 1 && <Caret />}
               </p>
@@ -203,7 +203,7 @@ export function ScreenChat({
                       className="flex items-start gap-2.5"
                     >
                       <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-violet" />
-                      <p className="text-[14px] leading-relaxed text-ink">
+                      <p className="text-[15px] leading-relaxed text-ink">
                         {b.body}
                       </p>
                     </motion.li>
@@ -222,7 +222,7 @@ export function ScreenChat({
                 transition={{ type: 'spring', stiffness: 320, damping: 30 }}
                 className="mt-3 rounded-3xl rounded-tl-md border border-line bg-white/70 p-2"
               >
-                <p className="px-2 py-1.5 text-[12px] font-medium text-ink-sub">
+                <p className="px-2 py-1.5 text-[14px] font-semibold text-ink">
                   연관 뉴스
                 </p>
                 <ul>
@@ -230,12 +230,12 @@ export function ScreenChat({
                     <li key={n.title}>
                       <Tappable
                         type="button"
-                        className="flex w-full items-center gap-2 rounded-2xl px-2 py-2 text-left hover:bg-black/[0.03]"
+                        className="flex w-full items-center gap-2 rounded-2xl px-2 py-2.5 text-left hover:bg-black/[0.03]"
                       >
-                        <span className="shrink-0 rounded-md bg-soft-blue/10 px-1.5 py-0.5 text-[11px] font-medium text-soft-blue">
+                        <span className="shrink-0 rounded-md bg-soft-blue/10 px-1.5 py-0.5 text-[13px] font-semibold text-soft-blue">
                           {n.source}
                         </span>
-                        <span className="flex-1 truncate text-[13px] text-ink">
+                        <span className="flex-1 truncate text-[14px] text-ink">
                           {n.title}
                         </span>
                         <ChevronRight className="h-4 w-4 shrink-0 text-ink-sub" />
@@ -245,7 +245,7 @@ export function ScreenChat({
                 </ul>
                 <Tappable
                   type="button"
-                  className="rounded-full px-2 py-2 text-[13px] font-medium text-soft-blue"
+                  className="rounded-full px-2 py-2 text-[14px] font-medium text-soft-blue"
                 >
                   관련 뉴스 더보기
                 </Tappable>
@@ -262,7 +262,7 @@ export function ScreenChat({
                 transition={{ type: 'spring', stiffness: 320, damping: 30 }}
                 className="mt-3 rounded-2xl bg-black/[0.04] px-4 py-3"
               >
-                <p className="text-[12px] leading-relaxed text-ink-sub">
+                <p className="text-[13px] leading-relaxed text-ink-sub">
                   제가 간추린 내용이라 원문과 다를 수 있어요. 중요한 판단 전엔
                   출처를 한 번 더 살펴봐 주세요.
                 </p>
@@ -307,7 +307,7 @@ export function ScreenChat({
               }
             }}
             placeholder="무엇이든 편하게 물어보세요"
-            className="min-w-0 flex-1 bg-transparent text-[15px] text-ink outline-none placeholder:text-ink-sub/70"
+            className="min-w-0 flex-1 bg-transparent text-[16px] text-ink outline-none placeholder:text-ink-sub"
           />
           <Tappable
             type="button"
@@ -318,7 +318,7 @@ export function ScreenChat({
             <ArrowUp className="h-5 w-5" strokeWidth={2.4} />
           </Tappable>
         </motion.div>
-        <p className="mb-1 mt-3 text-center text-[12px] text-ink-sub">
+        <p className="mb-1 mt-3 text-center text-[13px] text-ink-sub">
           AI는 실수할 수 있어요. 내용을 한 번 더 확인해 주세요.
         </p>
       </div>
