@@ -32,7 +32,8 @@ export function Prototype() {
   /** 공통 콘텐츠 영역 */
   const content = (isMobile: boolean) => (
     <>
-      {/* ── 고정 헤더: 채팅 화면에서만 표시, 애니메이션 없이 바로 등장 ── */}
+      {/* ── 고정 헤더: 채팅 화면에서만 표시 ── */}
+      {/* sticky top-0 z-30: 키패드가 올라와도 헤더는 뷰포트 상단에 고정 */}
       <AnimatePresence>
         {screen === 'chat' && (
           <motion.div
@@ -41,7 +42,7 @@ export function Prototype() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.18 }}
-            className="absolute inset-x-0 top-0 z-30 flex h-14 items-center justify-center border-b border-line/30 bg-white/92 px-4 backdrop-blur-sm"
+            className="sticky top-0 z-30 flex h-14 shrink-0 items-center justify-center border-b border-line/30 bg-white/95 px-4 backdrop-blur-sm"
           >
             <Tappable
               type="button"
@@ -76,12 +77,11 @@ export function Prototype() {
         ) : (
           <motion.div
             key="chat"
-            // 헤더는 위에서 이미 고정, 콘텐츠만 아래에서 슬라이드 업
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 14 }}
             transition={{ type: 'spring', stiffness: 340, damping: 36 }}
-            className="absolute inset-0"
+            className="absolute inset-x-0 bottom-0 top-14"
           >
             <ScreenChat
               key={chatKey}
@@ -108,7 +108,8 @@ export function Prototype() {
   return (
     <>
       {/* ── 모바일: 풀스크린 (md 미만) ── */}
-      <div className="fixed inset-0 md:hidden">
+      {/* dvh: 키패드가 올라와도 뷰포트 높이가 줄어드므로 콘텐츠가 밀리지 않음 */}
+      <div className="fixed inset-0 md:hidden" style={{ height: '100dvh' }}>
         <div className="relative h-full w-full overflow-hidden bg-white">
           {content(true)}
         </div>
