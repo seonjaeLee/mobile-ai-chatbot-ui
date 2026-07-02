@@ -9,12 +9,10 @@ import { Tappable } from './tappable'
 export function ScreenHome({
   onAsk,
   onOpenMenu,
-  isMobile = false,
   isExiting = false,
 }: {
   onAsk: (q: string) => void
   onOpenMenu: () => void
-  isMobile?: boolean
   isExiting?: boolean
 }) {
   const [value, setValue] = useState('')
