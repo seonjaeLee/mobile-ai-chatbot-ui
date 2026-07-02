@@ -50,11 +50,13 @@ export function ScreenChat({
   onBack,
   onAsk,
   onOpenMenu,
+  onScrollChange,
 }: {
   question: string
   onBack: () => void
   onAsk: (q: string) => void
   onOpenMenu: () => void
+  onScrollChange?: (hasScrolled: boolean) => void
 }) {
   // ISA 질문 여부 판단 — question에 'ISA'가 포함되면 단순 답변 모드
   const isISA = question.includes('ISA')
@@ -70,6 +72,7 @@ export function ScreenChat({
   const [value, setValue] = useState('')
   const [focused, setFocused] = useState(false)
   const [scrolling, setScrolling] = useState(false)
+  const [hasScrolled, setHasScrolled] = useState(false)
   const scrollRef = useRef<HTMLDivElement>(null)
   const scrollTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
@@ -77,6 +80,13 @@ export function ScreenChat({
     setScrolling(true)
     if (scrollTimer.current) clearTimeout(scrollTimer.current)
     scrollTimer.current = setTimeout(() => setScrolling(false), 700)
+    
+    // 헤더 효과: 스크롤 위치에 따라 동적으로
+    if (scrollRef.current) {
+      const scrolled = scrollRef.current.scrollTop > 8
+      setHasScrolled(scrolled)
+      onScrollChange?.(scrolled)
+    }
   }
 
   useEffect(() => () => { if (scrollTimer.current) clearTimeout(scrollTimer.current) }, [])
@@ -153,13 +163,13 @@ export function ScreenChat({
   const totalAmount = (selectedPrice ?? BASE_PRICE) * QTY
 
   return (
-    <div className="relative flex h-full flex-col pt-14">{/* 배경은 prototype.tsx에서 공유, pt-14로 fixed 헤더 여백 확보 */}
+    <div className="relative flex h-full flex-col">{/* 전체 높이 채우기, 헤더는 fixed top-0 z-40으로 겹침 */}
 
-      {/* ── 스크롤 대화 영역: pb로 입력창까지 스크롤 가능하게 ── */}
+      {/* ── 스크롤 대화 영역: pb로 입력창까지 스크롤 가능하게, pt-14로 헤더 높이만큼 첫 콘텐츠 상단 여백 ── */}
       <div
         ref={scrollRef}
         onScroll={handleScroll}
-        className={`mobile-scroll relative flex-1 overflow-y-auto px-4 pb-36 pt-3 ${scrolling ? 'is-scrolling' : ''}`}
+        className={`mobile-scroll relative flex-1 overflow-y-auto px-4 pb-36 pt-14 ${scrolling ? 'is-scrolling' : ''}`}
       >
         <div className="flex flex-col gap-5 py-3">
 
