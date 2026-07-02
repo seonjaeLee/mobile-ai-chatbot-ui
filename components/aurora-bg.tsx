@@ -8,17 +8,15 @@ export function AuroraBg({ className = '' }: { className?: string }) {
       aria-hidden
       className={`pointer-events-none absolute inset-0 ${className}`}
       style={{
-        /* 베이스 흰색 — 라벤더 베이스가 하단에서 핑크로 보이는 문제 제거 */
-        background: '#ffffff',
+        /* #f8f8f8 베이스 — 순백보다 부드럽고, 라벤더 잔상 없이 깔끔하게 마무리 */
+        background: '#f8f8f8',
         backgroundImage: [
           /* 우상단 민트 */
-          'radial-gradient(60% 50% at 100% 0%, rgba(186,237,232,0.78) 0%, transparent 68%)',
+          'radial-gradient(60% 50% at 100% 0%, rgba(186,237,232,0.80) 0%, transparent 68%)',
           /* 좌상단 라벤더 */
-          'radial-gradient(55% 45% at 0% 8%, rgba(210,205,248,0.72) 0%, transparent 68%)',
-          /* 중앙 연보라 안개 — 상단 40% 안에만 */
-          'radial-gradient(80% 38% at 50% 28%, rgba(220,216,252,0.38) 0%, transparent 60%)',
-          /* 하단 완전 흰색 덮기 */
-          'linear-gradient(to bottom, transparent 42%, #ffffff 78%)',
+          'radial-gradient(55% 45% at 0% 8%, rgba(210,205,248,0.75) 0%, transparent 68%)',
+          /* 중앙 연보라 안개 */
+          'radial-gradient(80% 38% at 50% 28%, rgba(220,216,252,0.40) 0%, transparent 60%)',
         ].join(','),
       }}
     />

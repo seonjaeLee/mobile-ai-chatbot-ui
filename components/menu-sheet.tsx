@@ -1,33 +1,41 @@
 'use client'
 
 import { AnimatePresence, motion, type PanInfo } from 'framer-motion'
-import {
-  X,
-  Receipt,
-  Wallet,
-  PiggyBank,
-  TrendingUp,
-} from 'lucide-react'
+import { X } from 'lucide-react'
 import { Tappable } from './tappable'
 
+// 이미지 레퍼런스 기준 1뎁스 플랫 메뉴 항목
+// query: 탭 시 사용자 발화로 전달될 텍스트
 const MENU_ITEMS = [
-  { icon: Receipt, title: '주문', subs: ['매수', '매도', '정정', '취소'] },
-  { icon: Wallet, title: '계좌', subs: ['잔고', '거래내역', '예수금', '이체'] },
-  { icon: PiggyBank, title: '연금', subs: ['개인연금', 'IRP', '연금이전'] },
-  { icon: TrendingUp, title: '금융상품', subs: ['펀드', 'ELS', 'ISA', 'RP'] },
+  { label: '매수 · 매도 주문',    query: '매수·매도 주문 방법 알려줘' },
+  { label: '잔고 · 거래내역',     query: '잔고와 거래내역 보는 방법 알려줘' },
+  { label: '펀드 · CMA',         query: '펀드와 CMA 상품 알려줘' },
+  { label: '연금저축계좌',        query: '연금저축계좌 알아보기' },
+  { label: '퇴직연금(IRP)',       query: '퇴직연금 IRP 알아보기' },
+  { label: 'ISA',                query: 'ISA 알아보기' },
+  { label: '국내·해외 주식거래',  query: '국내·해외 주식거래 방법 알려줘' },
+  { label: '공모주·배당·수수료',  query: '공모주, 배당, 수수료 안내 해줘' },
 ]
 
 export function MenuSheet({
   open,
   onClose,
   onNewChat,
+  onAsk,
 }: {
   open: boolean
   onClose: () => void
   onNewChat: () => void
+  onAsk: (q: string) => void
 }) {
   const handleDragEnd = (_: unknown, info: PanInfo) => {
     if (info.offset.y > 120 || info.velocity.y > 600) onClose()
+  }
+
+  const handleItem = (query: string) => {
+    onClose()
+    // 시트 닫힘 애니메이션(300ms) 후 화면 전환
+    setTimeout(() => onAsk(query), 320)
   }
 
   return (
@@ -45,7 +53,7 @@ export function MenuSheet({
             className="absolute inset-0 z-40 bg-ink/30"
           />
 
-          {/* 바텀시트 — 헤더 위 60px가 항상 노출되도록 max-h 제한 */}
+          {/* 바텀시트 */}
           <motion.div
             initial={{ y: '100%' }}
             animate={{ y: 0 }}
@@ -78,41 +86,28 @@ export function MenuSheet({
 
             {/* 스크롤 영역 + 하단 페이드 마스크 */}
             <div className="relative min-h-0 flex-1">
-              {/* 실제 스크롤 컨테이너 */}
-              <div className="mobile-scroll h-full overflow-y-auto px-2 pb-10">
-                {MENU_ITEMS.map((item) => (
-                  <div key={item.title} className="border-b border-line last:border-b-0">
-                    {/* 1뎁스 */}
-                    <div className="flex items-center gap-3.5 px-3 pb-2 pt-4">
-                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-black/[0.04]">
-                        <item.icon className="h-5 w-5 text-ink" strokeWidth={1.8} />
-                      </span>
-                      <span className="text-[16px] font-semibold text-ink">
-                        {item.title}
-                      </span>
-                    </div>
-                    {/* 2뎁스 — 항상 노출 */}
-                    <div className="flex flex-wrap gap-2 pb-4 pl-[3.65rem] pr-3">
-                      {item.subs.map((sub) => (
-                        <Tappable
-                          key={sub}
-                          type="button"
-                          className="rounded-full border border-line px-4 py-2 text-[14px] font-medium text-ink transition-colors hover:border-violet/40 hover:bg-violet-soft hover:text-violet"
-                        >
-                          {sub}
-                        </Tappable>
-                      ))}
-                    </div>
-                  </div>
-                ))}
+              <div className="mobile-scroll h-full overflow-y-auto pb-10">
+                <ul>
+                  {MENU_ITEMS.map((item) => (
+                    <li key={item.label} className="border-b border-line last:border-b-0">
+                      <Tappable
+                        type="button"
+                        onClick={() => handleItem(item.query)}
+                        className="flex w-full items-center px-5 py-4 text-left hover:bg-black/[0.03] active:bg-violet-soft"
+                      >
+                        <span className="text-[16px] font-medium text-ink">
+                          {item.label}
+                        </span>
+                      </Tappable>
+                    </li>
+                  ))}
+                </ul>
               </div>
 
-              {/* 하단 페이드 아웃 마스크 */}
+              {/* 하단 페이드 마스크 */}
               <div
                 className="pointer-events-none absolute inset-x-0 bottom-0 h-16 rounded-b-[2rem]"
-                style={{
-                  background: 'linear-gradient(to bottom, transparent, white)',
-                }}
+                style={{ background: 'linear-gradient(to bottom, transparent, white)' }}
               />
             </div>
           </motion.div>

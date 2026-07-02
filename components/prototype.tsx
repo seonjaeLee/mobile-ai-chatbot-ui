@@ -104,6 +104,7 @@ export function Prototype() {
           setMenuOpen(false)
           goHome()
         }}
+        onAsk={ask}
       />
     </>
   )

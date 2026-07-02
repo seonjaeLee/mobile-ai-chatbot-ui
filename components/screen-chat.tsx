@@ -31,10 +31,14 @@ const INTRO_TEXT = '삼성전자 1주당 매수 가격을 선택하거나 입력
 const CONFIRM_INTRO = `아래 내용과 같이 삼성전자 ${QTY}주 매수 접수 할게요. 확인 후 주문을 실행해 주세요. 주문 실행 시 정정·취소가 제한될 수 있어요.`
 const DONE_TEXT = '매수 주문이 정상 접수되었어요. 체결 여부는 거래내역에서 확인할 수 있어요. 체결되면 알림으로 알려드릴게요.'
 
+// ISA 단순 답변 모드
+const ISA_TEXT = 'ISA(개인종합자산관리계좌)는 예금·펀드·ETF를 한 계좌에 담아 비과세 혜택을 받는 절세 계좌예요.'
+const ISA_CHIPS = ['가입 자격 확인', '납입 한도 조회', '계좌 개설하기']
+
 // stage
 // 0 = AI 타이핑 dots
-// 1 = 호가 안내 텍스트 스트리밍
-// 2 = 호가창 카드 (가격 미선택 → 선택 → 버튼 눌러 확정)
+// 1 = 호가 안내 텍스트 스트리밍 (매수 모드) / ISA 텍스트 스트리밍 (ISA 모드)
+// 2 = 호가창 카드 (매수 모드) / ISA 칩 노출 (ISA 모드)
 // 3 = 사용자 발화 2 + AI 타이핑 dots
 // 4 = 주문확인 텍스트 스트리밍
 // 5 = 주문확인 카드 (매수실행 전)
@@ -52,6 +56,9 @@ export function ScreenChat({
   onAsk: (q: string) => void
   onOpenMenu: () => void
 }) {
+  // ISA 질문 여부 판단 — question에 'ISA'가 포함되면 단순 답변 모드
+  const isISA = question.includes('ISA')
+
   const [stage, setStage] = useState<Stage>(0)
   const [typed1, setTyped1] = useState('')
   const [typed2, setTyped2] = useState('')
@@ -80,17 +87,18 @@ export function ScreenChat({
     return () => clearTimeout(t)
   }, [])
 
-  // stage 1: 타이핑
+  // stage 1: 타이핑 — ISA 모드와 매수 모드 분기
   useEffect(() => {
     if (stage !== 1) return
+    const text = isISA ? ISA_TEXT : INTRO_TEXT
     let i = 0
     const id = setInterval(() => {
       i++
-      setTyped1(INTRO_TEXT.slice(0, i))
-      if (i >= INTRO_TEXT.length) { clearInterval(id); setTimeout(() => setStage(2), 300) }
+      setTyped1(text.slice(0, i))
+      if (i >= text.length) { clearInterval(id); setTimeout(() => setStage(2), 300) }
     }, 22)
     return () => clearInterval(id)
-  }, [stage])
+  }, [stage, isISA])
 
   // stage 3 → 4
   useEffect(() => {
@@ -171,9 +179,31 @@ export function ScreenChat({
               </div>
             </div>
 
-            {/* 호가창 카드 */}
+            {/* ISA 모드: 연관 칩 */}
             <AnimatePresence>
-              {stage >= 2 && (
+              {isISA && stage >= 2 && (
+                <motion.div
+                  initial={{ opacity: 0, y: 14 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 28 }}
+                  className="flex flex-wrap gap-2 pt-1"
+                >
+                  {ISA_CHIPS.map((chip) => (
+                    <Tappable
+                      key={chip}
+                      type="button"
+                      className="rounded-full border border-line bg-white/80 px-4 py-2 text-[14px] font-medium text-ink transition-colors hover:border-violet/40 hover:bg-violet-soft hover:text-violet"
+                    >
+                      {chip}
+                    </Tappable>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* 호가창 카드 (매수 모드 전용) */}
+            <AnimatePresence>
+              {!isISA && stage >= 2 && (
                 <motion.div
                   initial={{ opacity: 0, y: 18 }}
                   animate={{ opacity: 1, y: 0 }}
