@@ -6,7 +6,6 @@ import { ArrowLeft, LayoutGrid, Mic, ArrowUp, ChevronUp } from 'lucide-react'
 import { AuroraBg } from './aurora-bg'
 import { Tappable } from './tappable'
 
-const QUICK_CHIPS = ['원/달러 환율', '내 수익률', '내 계좌', '오늘 코스피 브리핑']
 
 export function ScreenHome({
   onAsk,
@@ -55,16 +54,20 @@ export function ScreenHome({
           variants={fadeUp}
           className="mb-3 text-sm text-ink-sub"
         >
-          좋은 아침이에요
+          선재Lee님 안녕하세요.
         </motion.p>
         <motion.h2
           variants={fadeUp}
-          className="mb-9 text-balance text-center text-[26px] font-bold leading-relaxed text-ink"
+          className="mb-2 text-balance text-center text-[26px] font-bold leading-relaxed text-ink"
         >
-          오늘은 어떤 하루가
-          <br />
-          기다리고 있을까요?
+          어떤 업무를 도와드릴까요?
         </motion.h2>
+        <motion.p
+          variants={fadeUp}
+          className="mb-9 text-sm text-ink-sub"
+        >
+          AI 상담사에게 자유롭게 물어보세요.
+        </motion.p>
 
         {/* 입력창 */}
         <motion.div
@@ -89,7 +92,7 @@ export function ScreenHome({
                 send()
               }
             }}
-            placeholder="무엇이든 편하게 물어보세요"
+            placeholder="필요한 업무를 입력해주세요"
             className="w-full resize-none bg-transparent text-[15px] leading-relaxed text-ink outline-none placeholder:text-ink-sub/70"
           />
           <div className="mt-2 flex items-center justify-between">
@@ -121,22 +124,7 @@ export function ScreenHome({
           </div>
         </motion.div>
 
-        {/* 빠른 진입 칩 */}
-        <motion.div
-          variants={fadeUp}
-          className="mt-5 flex w-full flex-wrap justify-center gap-2"
-        >
-          {QUICK_CHIPS.map((chip) => (
-            <Tappable
-              key={chip}
-              type="button"
-              onClick={() => onAsk(chip)}
-              className="rounded-full border border-line bg-white/70 px-4 py-2 text-[13px] font-medium text-ink transition-colors hover:border-violet/40 hover:text-violet"
-            >
-              {chip}
-            </Tappable>
-          ))}
-        </motion.div>
+
       </motion.div>
 
       {/* 하단 전체메뉴 트리거 */}
@@ -150,7 +138,7 @@ export function ScreenHome({
           className="flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[13px] font-medium text-ink-sub transition-colors hover:text-ink"
         >
           <ChevronUp className="h-4 w-4" strokeWidth={2} />
-          전체메뉴
+          챗봇 메뉴
         </Tappable>
       </div>
     </div>

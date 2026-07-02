@@ -4,23 +4,13 @@ import { useState } from 'react'
 import { AnimatePresence, motion, type PanInfo } from 'framer-motion'
 import {
   X,
-  ChevronRight,
   ChevronDown,
-  MessageCirclePlus,
-  Clock,
-  Star,
   Receipt,
   Wallet,
   PiggyBank,
   TrendingUp,
 } from 'lucide-react'
 import { Tappable } from './tappable'
-
-const LIST_ITEMS = [
-  { icon: MessageCirclePlus, title: '새 대화 시작', desc: '지금 대화를 정리하고 새로 시작', action: 'new' as const },
-  { icon: Clock, title: '최근 대화', desc: '지난 질문·답변 다시 보기' },
-  { icon: Star, title: '관심 종목', desc: '담아둔 종목 한눈에' },
-]
 
 const ACCORDION_ITEMS = [
   { icon: Receipt, title: '주문', desc: '매수·매도·정정·취소', subs: ['매수', '매도', '정정', '취소'] },
@@ -79,7 +69,7 @@ export function MenuSheet({
 
             {/* 헤더 */}
             <div className="flex items-center justify-between px-5 pb-2 pt-4">
-              <h2 className="text-[17px] font-bold text-ink">전체 메뉴</h2>
+              <h2 className="text-[17px] font-bold text-ink">챗봇 메뉴</h2>
               <Tappable
                 type="button"
                 aria-label="닫기"
@@ -91,32 +81,6 @@ export function MenuSheet({
             </div>
 
             <div className="min-h-0 flex-1 overflow-y-auto">
-              {/* 리스트 항목 */}
-              <ul className="px-2">
-                {LIST_ITEMS.map((item) => (
-                  <li key={item.title} className="border-b border-line last:border-b-0">
-                    <Tappable
-                      type="button"
-                      onClick={item.action === 'new' ? onNewChat : undefined}
-                      className="flex w-full items-center gap-3.5 rounded-2xl px-3 py-4 text-left hover:bg-black/[0.03]"
-                    >
-                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-violet-soft">
-                        <item.icon className="h-5 w-5 text-violet" strokeWidth={1.8} />
-                      </span>
-                      <span className="flex-1">
-                        <span className="block text-[15px] font-medium text-ink">
-                          {item.title}
-                        </span>
-                        <span className="block text-[12.5px] text-ink-sub">
-                          {item.desc}
-                        </span>
-                      </span>
-                      <ChevronRight className="h-5 w-5 shrink-0 text-ink-sub" />
-                    </Tappable>
-                  </li>
-                ))}
-              </ul>
-
               {/* 아코디언 */}
               <div className="mt-1 px-2 pb-8">
                 {ACCORDION_ITEMS.map((item) => {
