@@ -1,18 +1,23 @@
 /**
- * 화이트 배경 위 중앙 집중형 오로라 그라데이션.
- * 화면 전체가 아니라 중앙에 부드럽게 모이도록 radial로 구성.
+ * 이미지 레퍼런스 배경:
+ * 우상단 민트, 좌중단 라벤더, 하단 흰색으로 자연스럽게 페이드되는 멀티톤 그라디언트.
  */
 export function AuroraBg({ className = '' }: { className?: string }) {
   return (
     <div
       aria-hidden
-      className={`pointer-events-none absolute inset-0 bg-white ${className}`}
+      className={`pointer-events-none absolute inset-0 ${className}`}
       style={{
+        background: '#f0effa',
         backgroundImage: [
-          'radial-gradient(40% 30% at 50% 34%, rgba(198,220,249,0.55), rgba(198,220,249,0) 70%)',
-          'radial-gradient(34% 26% at 32% 28%, rgba(218,239,238,0.6), rgba(218,239,238,0) 72%)',
-          'radial-gradient(36% 28% at 70% 30%, rgba(216,211,249,0.55), rgba(216,211,249,0) 72%)',
-          'radial-gradient(50% 34% at 50% 44%, rgba(238,240,248,0.7), rgba(238,240,248,0) 75%)',
+          /* 우상단 민트 */
+          'radial-gradient(60% 55% at 100% 0%, rgba(186,237,232,0.72) 0%, transparent 70%)',
+          /* 좌상단~중앙 라벤더 */
+          'radial-gradient(55% 50% at 0% 30%, rgba(210,205,248,0.65) 0%, transparent 70%)',
+          /* 중앙 퍼플 안개 */
+          'radial-gradient(70% 45% at 50% 50%, rgba(220,216,252,0.45) 0%, transparent 65%)',
+          /* 하단 화이트 페이드 */
+          'linear-gradient(to bottom, transparent 55%, rgba(255,255,255,0.85) 100%)',
         ].join(','),
       }}
     />
