@@ -487,9 +487,10 @@ export function ScreenChat({
       </div>
 
       {/* ── 하단 입력 영역 ── */}
+      {/* 하단 입력 영역 — 2행 카드 */}
       <div
         className="relative shrink-0 px-4 pt-2"
-        style={{ paddingBottom: 'calc(1.5rem + env(safe-area-inset-bottom, 0px))' }}
+        style={{ paddingBottom: 'calc(1.25rem + env(safe-area-inset-bottom, 0px))' }}
       >
         <motion.div
           animate={{
@@ -498,52 +499,57 @@ export function ScreenChat({
               ? '0 12px 34px -14px rgba(110,93,231,0.35)'
               : '0 10px 30px -14px rgba(35,33,54,0.18)',
           }}
-          className="flex items-center gap-2 rounded-full border bg-white/85 py-2 pl-2 pr-2 backdrop-blur"
+          className="rounded-3xl border bg-white/85 backdrop-blur"
         >
-          <Tappable
-            type="button"
-            aria-label="챗봇메뉴"
-            onClick={onOpenMenu}
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-ink-sub hover:bg-black/5"
-          >
-            <LayoutGrid className="h-5 w-5" strokeWidth={1.8} />
-          </Tappable>
-          <input
-            type="text"
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
-            onFocus={() => setFocused(true)}
-            onBlur={() => setFocused(false)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' && !e.nativeEvent.isComposing) {
-                e.preventDefault()
-                send()
-              }
-            }}
-            placeholder="필요한 업무를 입력해주세요"
-            className="min-w-0 flex-1 bg-transparent text-[16px] text-ink outline-none placeholder:text-ink-sub"
-          />
-          <Tappable
-            type="button"
-            aria-label="음성 입력"
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-ink-sub hover:bg-black/5"
-          >
-            <Mic className="h-5 w-5" strokeWidth={1.8} />
-          </Tappable>
-          <motion.button
-            type="button"
-            aria-label="전송"
-            onClick={send}
-            whileTap={{ scale: 0.88 }}
-            disabled={!value.trim()}
-            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-violet text-white shadow-sm hover:opacity-90 disabled:opacity-30"
-          >
-            <ArrowUp className="h-5 w-5" strokeWidth={2.4} />
-          </motion.button>
+          {/* 1행: 텍스트 입력 */}
+          <div className="px-4 pt-4">
+            <input
+              type="text"
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
+              onFocus={() => setFocused(true)}
+              onBlur={() => setFocused(false)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && !e.nativeEvent.isComposing) {
+                  e.preventDefault()
+                  send()
+                }
+              }}
+              placeholder="필요한 업무를 입력해주세요"
+              className="w-full bg-transparent text-[16px] text-ink outline-none placeholder:text-ink-sub"
+            />
+          </div>
+          {/* 2행: 버튼 영역 */}
+          <div className="flex items-center justify-between px-3 pb-3 pt-2">
+            <Tappable
+              type="button"
+              aria-label="챗봇 메뉴"
+              onClick={onOpenMenu}
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-ink-sub hover:bg-black/5"
+            >
+              <LayoutGrid className="h-5 w-5" strokeWidth={1.8} />
+            </Tappable>
+            <div className="flex items-center gap-2">
+              <Tappable
+                type="button"
+                aria-label="음성 입력"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-ink-sub hover:bg-black/5"
+              >
+                <Mic className="h-5 w-5" strokeWidth={1.8} />
+              </Tappable>
+              <motion.button
+                type="button"
+                aria-label="전송"
+                onClick={send}
+                whileTap={{ scale: 0.88 }}
+                disabled={!value.trim()}
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-violet text-white shadow-sm hover:opacity-90 disabled:opacity-30"
+              >
+                <ArrowUp className="h-5 w-5" strokeWidth={2.4} />
+              </motion.button>
+            </div>
+          </div>
         </motion.div>
-        <p className="mb-1 mt-2.5 text-center text-[13px] text-ink-sub">
-          AI는 실수할 수 있어요. 내용을 한 번 더 확인해 주세요.
-        </p>
       </div>
     </div>
   )

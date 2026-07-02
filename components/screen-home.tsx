@@ -68,7 +68,7 @@ export function ScreenHome({
           AI 상담사에게 자유롭게 물어보세요.
         </motion.p>
 
-        {/* 입력창 */}
+        {/* 입력창 — 2행 카드 */}
         <motion.div
           variants={fadeUp}
           animate={{
@@ -77,27 +77,31 @@ export function ScreenHome({
               ? '0 14px 40px -12px rgba(110,93,231,0.35)'
               : '0 10px 30px -12px rgba(35,33,54,0.18)',
           }}
-          className="w-full rounded-3xl border bg-white/80 p-4 backdrop-blur"
+          className="w-full rounded-3xl border bg-white/85 backdrop-blur"
         >
-          <textarea
-            rows={2}
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
-            onFocus={() => setFocused(true)}
-            onBlur={() => setFocused(false)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault()
-                send()
-              }
-            }}
-            placeholder="필요한 업무를 입력해주세요"
-            className="w-full resize-none bg-transparent text-[16px] leading-relaxed text-ink outline-none placeholder:text-ink-sub"
-          />
-          <div className="mt-2 flex items-center justify-between">
+          {/* 1행: 텍스트 입력 영역 */}
+          <div className="px-4 pt-4">
+            <textarea
+              rows={1}
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
+              onFocus={() => setFocused(true)}
+              onBlur={() => setFocused(false)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && !e.shiftKey && !e.nativeEvent.isComposing) {
+                  e.preventDefault()
+                  send()
+                }
+              }}
+              placeholder="필요한 업무를 입력해주세요"
+              className="w-full resize-none bg-transparent text-[16px] leading-relaxed text-ink outline-none placeholder:text-ink-sub"
+            />
+          </div>
+          {/* 2행: 버튼 영역 */}
+          <div className="flex items-center justify-between px-3 pb-3 pt-2">
             <Tappable
               type="button"
-              aria-label="전체메뉴"
+              aria-label="챗봇 메뉴"
               onClick={onOpenMenu}
               className="flex h-9 w-9 items-center justify-center rounded-full text-ink-sub hover:bg-black/5"
             >
@@ -115,7 +119,7 @@ export function ScreenHome({
                 type="button"
                 aria-label="전송"
                 onClick={send}
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-violet text-white shadow-sm hover:opacity-90"
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-violet text-white shadow-sm hover:opacity-90 disabled:opacity-30"
               >
                 <ArrowUp className="h-5 w-5" strokeWidth={2.4} />
               </Tappable>
