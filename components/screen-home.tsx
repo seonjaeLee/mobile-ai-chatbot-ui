@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { ArrowLeft, LayoutGrid, Mic, ArrowUp, ChevronUp } from 'lucide-react'
+import { X, LayoutGrid, Mic, ArrowUp, ChevronUp } from 'lucide-react'
 import { AuroraBg } from './aurora-bg'
 import { Tappable } from './tappable'
 
@@ -20,7 +20,8 @@ export function ScreenHome({
   const [focused, setFocused] = useState(false)
 
   const send = () => {
-    onAsk(value || '오늘 주식장이 왜 이래?')
+    if (!value.trim()) return
+    onAsk(value)
     setValue('')
   }
 
@@ -32,10 +33,10 @@ export function ScreenHome({
       <header className="relative flex h-14 items-center justify-center px-4">
         <Tappable
           type="button"
-          aria-label="나가기"
+          aria-label="닫기"
           className="absolute left-3 flex h-10 w-10 items-center justify-center rounded-full text-ink hover:bg-black/5"
         >
-          <ArrowLeft className="h-[22px] w-[22px]" strokeWidth={2} />
+          <X className="h-[22px] w-[22px]" strokeWidth={2} />
         </Tappable>
         <h1 className="text-[17px] font-semibold text-ink">삼성증권mPOP AI챗봇</h1>
       </header>

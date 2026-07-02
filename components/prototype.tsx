@@ -2,10 +2,11 @@
 
 import { useState, useCallback } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Signal, Wifi, BatteryFull } from 'lucide-react'
+import { ArrowLeft, Signal, Wifi, BatteryFull } from 'lucide-react'
 import { ScreenHome } from './screen-home'
 import { ScreenChat } from './screen-chat'
 import { MenuSheet } from './menu-sheet'
+import { Tappable } from './tappable'
 
 export type Screen = 'home' | 'chat'
 
@@ -28,28 +29,58 @@ export function Prototype() {
 
   const goHome = useCallback(() => setScreen('home'), [])
 
-  /** 화면 콘텐츠 (스크린 전환 + 메뉴 시트) */
+  /** 공통 콘텐츠 영역 */
   const content = (isMobile: boolean) => (
     <>
+      {/* ── 고정 헤더: 채팅 화면에서만 표시, 애니메이션 없이 바로 등장 ── */}
+      <AnimatePresence>
+        {screen === 'chat' && (
+          <motion.div
+            key="chat-header"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.18 }}
+            className="absolute inset-x-0 top-0 z-30 flex h-14 items-center justify-center border-b border-line/30 bg-white/92 px-4 backdrop-blur-sm"
+          >
+            <Tappable
+              type="button"
+              aria-label="뒤로"
+              onClick={goHome}
+              className="absolute left-3 flex h-10 w-10 items-center justify-center rounded-full text-ink hover:bg-black/5"
+            >
+              <ArrowLeft className="h-[22px] w-[22px]" strokeWidth={2} />
+            </Tappable>
+            <h1 className="text-[17px] font-semibold text-ink">삼성증권mPOP AI챗봇</h1>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* ── 화면 전환 영역 ── */}
       <AnimatePresence initial={false} mode="popLayout">
         {screen === 'home' ? (
           <motion.div
             key="home"
-            initial={{ opacity: 0, x: -40 }}
+            initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -40 }}
-            transition={{ type: 'spring', stiffness: 320, damping: 34 }}
+            exit={{ opacity: 0, x: -30 }}
+            transition={{ type: 'spring', stiffness: 340, damping: 36 }}
             className="absolute inset-0"
           >
-            <ScreenHome onAsk={ask} onOpenMenu={() => setMenuOpen(true)} isMobile={isMobile} />
+            <ScreenHome
+              onAsk={ask}
+              onOpenMenu={() => setMenuOpen(true)}
+              isMobile={isMobile}
+            />
           </motion.div>
         ) : (
           <motion.div
             key="chat"
-            initial={{ opacity: 0, x: 60 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 60 }}
-            transition={{ type: 'spring', stiffness: 320, damping: 34 }}
+            // 헤더는 위에서 이미 고정, 콘텐츠만 아래에서 슬라이드 업
+            initial={{ opacity: 0, y: 28 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 14 }}
+            transition={{ type: 'spring', stiffness: 340, damping: 36 }}
             className="absolute inset-0"
           >
             <ScreenChat
@@ -76,16 +107,14 @@ export function Prototype() {
 
   return (
     <>
-      {/* ── 모바일: 풀스크린 ── */}
-      {/* md 미만에서만 표시, 화면 전체를 꽉 채움 */}
+      {/* ── 모바일: 풀스크린 (md 미만) ── */}
       <div className="fixed inset-0 md:hidden">
         <div className="relative h-full w-full overflow-hidden bg-white">
           {content(true)}
         </div>
       </div>
 
-      {/* ── PC: 폰 목업 ── */}
-      {/* md 이상에서만 표시 */}
+      {/* ── PC: 폰 목업 (md 이상) ── */}
       <div className="hidden md:flex md:flex-col md:items-center md:gap-5">
         <div className="relative h-[844px] w-[390px] shrink-0 rounded-[3.2rem] bg-[#0d0d12] p-[12px] shadow-[0_40px_90px_-20px_rgba(35,33,54,0.45)]">
           <div className="relative h-full w-full overflow-hidden rounded-[2.5rem] bg-white">
@@ -103,7 +132,7 @@ export function Prototype() {
 
         <p className="max-w-[390px] text-center text-[13px] leading-relaxed text-ink-sub">
           입력창에 질문을 보내거나 칩을 눌러 대화를 시작해 보세요. 하단{' '}
-          <span className="font-medium text-ink">전체메뉴</span>를 끌어올리거나
+          <span className="font-medium text-ink">챗봇 메뉴</span>를 끌어올리거나
           아래로 드래그해 닫을 수 있어요.
         </p>
       </div>
