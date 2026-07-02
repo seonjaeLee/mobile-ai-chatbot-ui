@@ -251,6 +251,7 @@ export function ScreenChat({
                       transition={{ duration: 0.2 }}
                       className="flex w-full items-center justify-center gap-2 rounded-2xl py-3.5 text-[16px] font-semibold disabled:cursor-not-allowed"
                     >
+                      매수가격 선택
                       <AnimatePresence mode="wait">
                         {priceConfirmed ? (
                           <motion.span
@@ -263,7 +264,6 @@ export function ScreenChat({
                           </motion.span>
                         ) : null}
                       </AnimatePresence>
-                      매수가격 선택
                     </motion.button>
                   </div>
                 </motion.div>
@@ -353,6 +353,7 @@ export function ScreenChat({
                           transition={{ duration: 0.2 }}
                           className="flex flex-[2] items-center justify-center gap-2 rounded-2xl py-3.5 text-[15px] font-semibold shadow-sm disabled:cursor-not-allowed"
                         >
+                          매수 · 실행
                           <AnimatePresence mode="wait">
                             {orderExecuted && (
                               <motion.span
@@ -365,7 +366,6 @@ export function ScreenChat({
                               </motion.span>
                             )}
                           </AnimatePresence>
-                          매수 · 실행
                         </motion.button>
                       </div>
                     </motion.div>
