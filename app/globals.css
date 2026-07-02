@@ -180,10 +180,11 @@
   html {
     @apply font-sans;
   }
-  /* 모바일 풀스크린 시 body 스크롤 차단 */
+  /* 모바일 풀스크린: dvh 사용으로 키패드 올라와도 뷰포트 고정 */
   @media (max-width: 767px) {
     html, body {
       height: 100%;
+      height: 100dvh;
       overflow: hidden;
     }
   }

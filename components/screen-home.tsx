@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { X, LayoutGrid, Mic, ArrowUp, ChevronUp } from 'lucide-react'
-import { AuroraBg } from './aurora-bg'
 import { Tappable } from './tappable'
 
 
@@ -26,11 +25,10 @@ export function ScreenHome({
   }
 
   return (
-    <div className="relative flex h-full flex-col">
-      <AuroraBg />
+    <div className="relative flex h-full flex-col">{/* 배경은 prototype.tsx에서 공유 */}
 
-      {/* 상단 바 */}
-      <header className="relative flex h-14 items-center justify-center px-4">
+      {/* 상단 바 — 채팅 헤더와 동일한 blur 처리로 배경 통일 */}
+      <header className="relative flex h-14 items-center justify-center border-b border-line/20 bg-white/60 px-4 backdrop-blur-md">
         <Tappable
           type="button"
           aria-label="닫기"

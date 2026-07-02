@@ -1,18 +1,22 @@
 /**
- * 화이트 배경 위 중앙 집중형 오로라 그라데이션.
- * 화면 전체가 아니라 중앙에 부드럽게 모이도록 radial로 구성.
+ * 이미지 레퍼런스 배경:
+ * 우상단 민트, 좌중단 라벤더, 하단 흰색으로 자연스럽게 페이드되는 멀티톤 그라디언트.
  */
 export function AuroraBg({ className = '' }: { className?: string }) {
   return (
     <div
       aria-hidden
-      className={`pointer-events-none absolute inset-0 bg-white ${className}`}
+      className={`pointer-events-none absolute inset-0 ${className}`}
       style={{
+        /* #f8f8f8 베이스 — 순백보다 부드럽고, 라벤더 잔상 없이 깔끔하게 마무리 */
+        background: '#f8f8f8',
         backgroundImage: [
-          'radial-gradient(40% 30% at 50% 34%, rgba(198,220,249,0.55), rgba(198,220,249,0) 70%)',
-          'radial-gradient(34% 26% at 32% 28%, rgba(218,239,238,0.6), rgba(218,239,238,0) 72%)',
-          'radial-gradient(36% 28% at 70% 30%, rgba(216,211,249,0.55), rgba(216,211,249,0) 72%)',
-          'radial-gradient(50% 34% at 50% 44%, rgba(238,240,248,0.7), rgba(238,240,248,0) 75%)',
+          /* 우상단 민트 */
+          'radial-gradient(60% 50% at 100% 0%, rgba(186,237,232,0.80) 0%, transparent 68%)',
+          /* 좌상단 라벤더 */
+          'radial-gradient(55% 45% at 0% 8%, rgba(210,205,248,0.75) 0%, transparent 68%)',
+          /* 중앙 연보라 안개 */
+          'radial-gradient(80% 38% at 50% 28%, rgba(220,216,252,0.40) 0%, transparent 60%)',
         ].join(','),
       }}
     />
