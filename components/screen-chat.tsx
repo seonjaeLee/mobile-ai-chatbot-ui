@@ -155,11 +155,11 @@ export function ScreenChat({
   return (
     <div className="relative flex h-full flex-col pt-14">{/* 배경은 prototype.tsx에서 공유, pt-14로 fixed 헤더 여백 확보 */}
 
-      {/* ── 스크롤 대화 영역 ── */}
+      {/* ── 스크롤 대화 영역: pb로 입력창까지 스크롤 가능하게 ── */}
       <div
         ref={scrollRef}
         onScroll={handleScroll}
-        className={`mobile-scroll relative flex-1 overflow-y-auto px-4 pb-4 pt-3 ${scrolling ? 'is-scrolling' : ''}`}
+        className={`mobile-scroll relative flex-1 overflow-y-auto px-4 pb-36 pt-3 ${scrolling ? 'is-scrolling' : ''}`}
       >
         <div className="flex flex-col gap-5 py-3">
 
