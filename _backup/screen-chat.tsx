@@ -273,10 +273,7 @@ export function ScreenChat({
       </div>
 
       {/* 하단 입력 영역 */}
-      <div
-        className="relative shrink-0 px-4 pt-2"
-        style={{ paddingBottom: 'calc(1.5rem + env(safe-area-inset-bottom, 0px))' }}
-      >
+      <div className="relative shrink-0 px-4 pb-6 pt-2">
         <motion.div
           animate={{
             borderColor: focused ? 'rgba(110,93,231,0.55)' : 'rgba(236,235,242,1)',

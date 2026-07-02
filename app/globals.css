@@ -180,6 +180,13 @@
   html {
     @apply font-sans;
   }
+  /* 모바일 풀스크린 시 body 스크롤 차단 */
+  @media (max-width: 767px) {
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
+  }
 }
 
 /* 모바일식 오버레이 스크롤바: 스크롤 중에만 나타나고 멈추면 페이드 아웃 */

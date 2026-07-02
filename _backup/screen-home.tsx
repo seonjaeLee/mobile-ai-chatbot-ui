@@ -11,11 +11,9 @@ const QUICK_CHIPS = ['원/달러 환율', '내 수익률', '내 계좌', '오늘
 export function ScreenHome({
   onAsk,
   onOpenMenu,
-  isMobile = false,
 }: {
   onAsk: (q: string) => void
   onOpenMenu: () => void
-  isMobile?: boolean
 }) {
   const [value, setValue] = useState('')
   const [focused, setFocused] = useState(false)
@@ -140,10 +138,7 @@ export function ScreenHome({
       </motion.div>
 
       {/* 하단 전체메뉴 트리거 */}
-      <div
-        className="relative flex items-center justify-center pb-7"
-        style={isMobile ? { paddingBottom: 'calc(1.75rem + env(safe-area-inset-bottom))' } : undefined}
-      >
+      <div className="relative flex items-center justify-center pb-7">
         <Tappable
           type="button"
           onClick={onOpenMenu}
