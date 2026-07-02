@@ -61,41 +61,37 @@ export function Prototype() {
       </AnimatePresence>
 
       {/* ── 화면 전환 영역 ── */}
-      <AnimatePresence initial={false} mode="popLayout">
-        {screen === 'home' ? (
-          <motion.div
-            key="home"
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -30 }}
-            transition={{ type: 'spring', stiffness: 340, damping: 36 }}
-            className="absolute inset-0"
-          >
-            <ScreenHome
-              onAsk={ask}
-              onOpenMenu={() => setMenuOpen(true)}
-              isMobile={isMobile}
-            />
-          </motion.div>
-        ) : (
-          <motion.div
-            key="chat"
-            initial={{ opacity: 0, y: 28 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 14 }}
-            transition={{ type: 'spring', stiffness: 340, damping: 36 }}
-            className="absolute inset-x-0 bottom-0 top-14"
-          >
-            <ScreenChat
-              key={chatKey}
-              question={question}
-              onBack={goHome}
-              onAsk={ask}
-              onOpenMenu={() => setMenuOpen(true)}
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* home/chat 동시 마운트 → layoutId가 두 화면 간에 작동 */}
+      <div className="absolute inset-0">
+        {/* 홈 화면 — chat 전환 시 fade out */}
+        <motion.div
+          animate={{ opacity: screen === 'home' ? 1 : 0, pointerEvents: screen === 'home' ? 'auto' : 'none' }}
+          transition={{ duration: 0.28, ease: 'easeInOut' }}
+          className="absolute inset-0"
+        >
+          <ScreenHome
+            onAsk={ask}
+            onOpenMenu={() => setMenuOpen(true)}
+            isMobile={isMobile}
+            isExiting={screen === 'chat'}
+          />
+        </motion.div>
+
+        {/* 채팅 화면 — home에서 chat으로 전환 시 fade in */}
+        <motion.div
+          animate={{ opacity: screen === 'chat' ? 1 : 0, pointerEvents: screen === 'chat' ? 'auto' : 'none' }}
+          transition={{ duration: 0.28, ease: 'easeInOut' }}
+          className="absolute inset-x-0 bottom-0 top-14"
+        >
+          <ScreenChat
+            key={chatKey}
+            question={question}
+            onBack={goHome}
+            onAsk={ask}
+            onOpenMenu={() => setMenuOpen(true)}
+          />
+        </motion.div>
+      </div>
 
       <MenuSheet
         open={menuOpen}

@@ -279,7 +279,7 @@ export function ScreenChat({
                       transition={{ duration: 0.2 }}
                       className="relative w-full rounded-2xl py-3.5 text-[16px] font-semibold disabled:cursor-not-allowed"
                     >
-                      {/* 텍스트는 항상 중앙 고정 */}
+                      {/* ���스트는 항상 중앙 고정 */}
                       <span className="flex items-center justify-center">매수가격 선택</span>
                       {/* 체크는 절대위치 우측 — 텍스트 위치에 영향 없음 */}
                       <AnimatePresence>
@@ -487,11 +487,14 @@ export function ScreenChat({
       </div>
 
       {/* ── 하단 입력 영역 ── */}
-      {/* 하단 입력 영역 — 상단만 둥근 바텀시트 */}
+      {/* 하단 입력 영역 — layoutId로 home 중앙 카드와 연결 */}
       <motion.div
+        layoutId="chat-input"
+        layout
         animate={{
           borderColor: focused ? 'rgba(110,93,231,0.4)' : 'rgba(236,235,242,1)',
         }}
+        transition={{ type: 'spring', stiffness: 300, damping: 32 }}
         className="shrink-0 rounded-t-3xl border-x border-t bg-white/95 shadow-[0_-8px_32px_-8px_rgba(35,33,54,0.12)] backdrop-blur"
         style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
       >
