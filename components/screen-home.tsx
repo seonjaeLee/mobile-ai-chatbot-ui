@@ -72,63 +72,70 @@ export function ScreenHome({
 
       </motion.div>
 
-      {/* 입력창 — 하단 바텀시트: 상단만 둥글고 좌우하단은 화면 끝까지 */}
+      {/* 입력창 — 둥근 카드, 좌우 여백 유지 */}
       <motion.div
-        initial={{ opacity: 0, y: 24 }}
+        initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ type: 'spring', stiffness: 300, damping: 30, delay: 0.25 }}
-        style={{
-          borderColor: focused ? 'rgba(110,93,231,0.4)' : 'rgba(236,235,242,1)',
-          paddingBottom: 'env(safe-area-inset-bottom, 0px)',
-        }}
-        className="shrink-0 rounded-t-3xl border-x border-t bg-white/95 shadow-[0_-8px_32px_-8px_rgba(35,33,54,0.12)] backdrop-blur"
+        className="shrink-0 px-6 pb-8"
+        style={{ paddingBottom: 'calc(2rem + env(safe-area-inset-bottom, 0px))' }}
       >
-        {/* 1행: 텍스트 입력 */}
-        <div className="px-5 pt-5">
-          <textarea
-            rows={1}
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
-            onFocus={() => setFocused(true)}
-            onBlur={() => setFocused(false)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' && !e.shiftKey && !e.nativeEvent.isComposing) {
-                e.preventDefault()
-                send()
-              }
-            }}
-            placeholder="필요한 업무를 입력해주세요"
-            className="w-full resize-none bg-transparent text-[16px] leading-relaxed text-ink outline-none placeholder:text-ink-sub"
-          />
-        </div>
-        {/* 2행: 버튼 영역 */}
-        <div className="flex items-center justify-between px-4 pb-4 pt-3">
-          <Tappable
-            type="button"
-            aria-label="챗봇 메뉴"
-            onClick={onOpenMenu}
-            className="flex h-9 w-9 items-center justify-center rounded-full text-ink-sub hover:bg-black/5"
-          >
-            <LayoutGrid className="h-5 w-5" strokeWidth={1.8} />
-          </Tappable>
-          <div className="flex items-center gap-2">
+        <motion.div
+          animate={{
+            borderColor: focused ? 'rgba(110,93,231,0.55)' : 'rgba(236,235,242,1)',
+            boxShadow: focused
+              ? '0 14px 40px -12px rgba(110,93,231,0.35)'
+              : '0 10px 30px -12px rgba(35,33,54,0.18)',
+          }}
+          className="w-full rounded-3xl border bg-white/85 backdrop-blur"
+        >
+          {/* 1행: 텍스트 입력 */}
+          <div className="px-4 pt-4">
+            <textarea
+              rows={2}
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
+              onFocus={() => setFocused(true)}
+              onBlur={() => setFocused(false)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && !e.shiftKey && !e.nativeEvent.isComposing) {
+                  e.preventDefault()
+                  send()
+                }
+              }}
+              placeholder="필요한 업무를 입력해주세요"
+              className="w-full resize-none bg-transparent text-[16px] leading-relaxed text-ink outline-none placeholder:text-ink-sub"
+            />
+          </div>
+          {/* 2행: 버튼 영역 */}
+          <div className="flex items-center justify-between px-3 pb-3 pt-2">
             <Tappable
               type="button"
-              aria-label="음성 입력"
+              aria-label="챗봇 메뉴"
+              onClick={onOpenMenu}
               className="flex h-9 w-9 items-center justify-center rounded-full text-ink-sub hover:bg-black/5"
             >
-              <Mic className="h-5 w-5" strokeWidth={1.8} />
+              <LayoutGrid className="h-5 w-5" strokeWidth={1.8} />
             </Tappable>
-            <Tappable
-              type="button"
-              aria-label="전송"
-              onClick={send}
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-violet text-white shadow-sm hover:opacity-90 disabled:opacity-30"
-            >
-              <ArrowUp className="h-5 w-5" strokeWidth={2.4} />
-            </Tappable>
+            <div className="flex items-center gap-2">
+              <Tappable
+                type="button"
+                aria-label="음성 입력"
+                className="flex h-9 w-9 items-center justify-center rounded-full text-ink-sub hover:bg-black/5"
+              >
+                <Mic className="h-5 w-5" strokeWidth={1.8} />
+              </Tappable>
+              <Tappable
+                type="button"
+                aria-label="전송"
+                onClick={send}
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-violet text-white shadow-sm hover:opacity-90 disabled:opacity-30"
+              >
+                <ArrowUp className="h-5 w-5" strokeWidth={2.4} />
+              </Tappable>
+            </div>
           </div>
-        </div>
+        </motion.div>
       </motion.div>
     </div>
   )
