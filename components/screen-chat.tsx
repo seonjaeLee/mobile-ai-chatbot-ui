@@ -440,7 +440,7 @@ export function ScreenChat({
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ type: 'spring', stiffness: 300, damping: 28, delay: 0.18 }}
-                  className="overflow-hidden rounded-2xl border border-line bg-white shadow-[0_4px_24px_-8px_rgba(35,33,54,0.14)]"
+                  className="mr-10 overflow-hidden rounded-2xl border border-line bg-white shadow-[0_4px_24px_-8px_rgba(35,33,54,0.14)]"
                 >
                   {/* 체크 + 타이틀 중앙 정렬 */}
                   <div className="flex flex-col items-center gap-2 px-4 pb-4 pt-6">
