@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from 'react'
 import { AnimatePresence, LayoutGroup, motion } from 'framer-motion'
-import { ArrowLeft, Signal, Wifi, BatteryFull } from 'lucide-react'
+import { ArrowLeft, Signal, Wifi, BatteryFull, X } from 'lucide-react'
 import { ScreenHome } from './screen-home'
 import { ScreenChat } from './screen-chat'
 import { MenuSheet } from './menu-sheet'
@@ -37,7 +37,7 @@ export function Prototype() {
       <AuroraBg />
 
       {/* ── 고정 헤더: 채팅 화면에서만 표시 ── */}
-      {/* absolute로 부모 컨테이너 기준 상단 고정 → 키패드가 올라와도 밀리지 않음 */}
+      {/* 고정 헤더: 키패드 올라와도 밀리지 않도록 fixed 사용 */}
       <AnimatePresence>
         {screen === 'chat' && (
           <motion.div
@@ -46,15 +46,15 @@ export function Prototype() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.18 }}
-            className="absolute left-0 right-0 top-0 z-30 flex h-14 shrink-0 items-center justify-center border-b border-line/20 bg-white/75 px-4 backdrop-blur-md"
+            className="fixed left-0 right-0 top-0 z-50 flex h-14 shrink-0 items-center justify-center border-b border-line/20 bg-white/90 px-4 backdrop-blur-md"
           >
             <Tappable
               type="button"
-              aria-label="뒤로"
+              aria-label="닫기"
               onClick={goHome}
-              className="absolute left-3 flex h-10 w-10 items-center justify-center rounded-full text-ink hover:bg-black/5"
+              className="absolute left-4 flex h-9 w-9 items-center justify-center rounded-full text-ink hover:bg-black/5"
             >
-              <ArrowLeft className="h-[22px] w-[22px]" strokeWidth={2} />
+              <X className="h-6 w-6" strokeWidth={2} />
             </Tappable>
             <h1 className="text-[17px] font-semibold text-ink">삼성증권mPOP AI챗봇</h1>
           </motion.div>
