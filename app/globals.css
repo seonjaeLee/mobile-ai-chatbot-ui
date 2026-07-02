@@ -49,7 +49,7 @@
 
   /* 삼성증권 mPOP AI상담사 디자인 시스템 */
   --color-ink: #232136;
-  --color-ink-sub: #6b6a80;
+  --color-ink-sub: #535265;
   --color-line: #ecebf2;
   --color-violet: #6e5de7;
   --color-violet-soft: #efedfd;
@@ -179,6 +179,13 @@
   }
   html {
     @apply font-sans;
+  }
+  /* 모바일 풀스크린 시 body 스크롤 차단 */
+  @media (max-width: 767px) {
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
   }
 }
 
