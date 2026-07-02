@@ -37,6 +37,7 @@ export function Prototype() {
       <AuroraBg />
 
       {/* ── 고정 헤더: 채팅 화면에서만 표시 ── */}
+      {/* absolute로 부모 컨테이너 기준 상단 고정 → 키패드가 올라와도 밀리지 않음 */}
       <AnimatePresence>
         {screen === 'chat' && (
           <motion.div
@@ -45,7 +46,7 @@ export function Prototype() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.18 }}
-            className="sticky top-0 z-30 flex h-14 shrink-0 items-center justify-center border-b border-line/20 bg-white/60 px-4 backdrop-blur-md"
+            className="absolute left-0 right-0 top-0 z-30 flex h-14 shrink-0 items-center justify-center border-b border-line/20 bg-white/75 px-4 backdrop-blur-md"
           >
             <Tappable
               type="button"
