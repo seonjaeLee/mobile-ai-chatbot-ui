@@ -77,10 +77,8 @@ export function ScreenHome({
           </motion.p>
         </motion.div>
 
-        {/* 입력창 — 중앙 카드 (layoutId로 chat 하단 입력창과 연결) */}
+        {/* 입력창 — 중앙 카드 */}
         <motion.div
-          layoutId="chat-input"
-          layout
           variants={fadeUp}
           animate={{
             borderColor: focused ? 'rgba(110,93,231,0.55)' : 'rgba(236,235,242,1)',
@@ -88,7 +86,6 @@ export function ScreenHome({
               ? '0 14px 40px -12px rgba(110,93,231,0.35)'
               : '0 10px 30px -12px rgba(35,33,54,0.18)',
           }}
-          transition={{ type: 'spring', stiffness: 300, damping: 32 }}
           className="w-full rounded-3xl border bg-white/85 backdrop-blur"
         >
           {/* 1행: 텍스트 입력 */}
