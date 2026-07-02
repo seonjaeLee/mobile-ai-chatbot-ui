@@ -68,18 +68,9 @@ export function ScreenHome({
           AI 상담사에게 자유롭게 물어보세요.
         </motion.p>
 
-
-
-      </motion.div>
-
-      {/* 입력창 — 둥근 카드, 좌우 여백 유지 */}
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ type: 'spring', stiffness: 300, damping: 30, delay: 0.25 }}
-        className="shrink-0 px-6 pb-4"
-      >
+        {/* 입력창 — 중앙 카드 */}
         <motion.div
+          variants={fadeUp}
           animate={{
             borderColor: focused ? 'rgba(110,93,231,0.55)' : 'rgba(236,235,242,1)',
             boxShadow: focused
