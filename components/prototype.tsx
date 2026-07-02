@@ -34,8 +34,8 @@ export function Prototype() {
   /** 공통 콘텐츠 영역 */
   const content = (isMobile: boolean) => (
     <>
-      {/* ── 배경: 항상 최하단에 고정, 모든 화면이 공유 ── */}
-      <AuroraBg />
+      {/* ── 배경: 전체 높이 채우기, 모든 화면이 공유 ── */}
+      <AuroraBg className="fixed inset-0 z-0" />
 
       {/* ── 고정 헤더: 채팅 화면에서만 표시 ── */}
       {/* 고정 헤더: 키패드 올라와도 밀리지 않도록 fixed 사용 */}
@@ -47,7 +47,7 @@ export function Prototype() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.18 }}
-            className="fixed left-0 right-0 top-0 z-50 flex h-14 shrink-0 items-center justify-center border-b bg-white px-4 transition-all duration-200"
+            className="fixed left-0 right-0 top-0 z-40 flex h-14 shrink-0 items-center justify-center border-b bg-white px-4 transition-all duration-200"
             style={{
               borderColor: headerHasScrolled ? 'rgba(236,235,242,1)' : 'transparent',
               backgroundColor: headerHasScrolled ? 'rgba(255,255,255,0.7)' : 'rgb(255,255,255)',
@@ -71,7 +71,7 @@ export function Prototype() {
       {/* ── 화면 전환 영역 ── */}
       {/* LayoutGroup: home/chat 동시 마운트 → layoutId가 두 화면 간에 작동 */}
       <LayoutGroup>
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="relative z-10 inset-0 overflow-hidden" style={{ position: isMobile ? 'fixed' : 'absolute', inset: 0 }}>
         {/* 홈 화면 — chat 전환 시 fade out */}
         <motion.div
           animate={{ opacity: screen === 'home' ? 1 : 0, pointerEvents: screen === 'home' ? 'auto' : 'none' }}
