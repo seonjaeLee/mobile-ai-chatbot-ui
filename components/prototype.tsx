@@ -83,7 +83,7 @@ export function Prototype() {
         <motion.div
           animate={{ opacity: screen === 'chat' ? 1 : 0, pointerEvents: screen === 'chat' ? 'auto' : 'none' }}
           transition={{ duration: 0.28, ease: 'easeInOut' }}
-          className="absolute inset-x-0 bottom-0 top-14"
+          className="absolute inset-0"
         >
           <ScreenChat
             key={chatKey}

@@ -153,9 +153,9 @@ export function ScreenChat({
   const totalAmount = (selectedPrice ?? BASE_PRICE) * QTY
 
   return (
-    <div className="relative flex h-full flex-col">{/* 배경은 prototype.tsx에서 공유 */}
+    <div className="relative flex h-full flex-col pt-14">{/* 배경은 prototype.tsx에서 공유, pt-14로 fixed 헤더 여백 확보 */}
 
-      {/* ── 스크롤 대화 영역: pt-14로 헤더 아래 시작 ── */}
+      {/* ── 스크롤 대화 영역 ── */}
       <div
         ref={scrollRef}
         onScroll={handleScroll}
