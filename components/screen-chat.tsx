@@ -208,7 +208,7 @@ export function ScreenChat({
                   initial={{ opacity: 0, y: 18 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ type: 'spring', stiffness: 300, damping: 28 }}
-                  className="overflow-hidden rounded-2xl border border-line bg-white shadow-[0_4px_24px_-8px_rgba(35,33,54,0.14)]"
+                  className="mr-10 overflow-hidden rounded-2xl border border-line bg-white shadow-[0_4px_24px_-8px_rgba(35,33,54,0.14)]"
                 >
                   {/* 종목 헤더 */}
                   <div className="border-b border-line px-4 pb-3 pt-4">
@@ -279,7 +279,7 @@ export function ScreenChat({
                       transition={{ duration: 0.2 }}
                       className="relative w-full rounded-2xl py-3.5 text-[16px] font-semibold disabled:cursor-not-allowed"
                     >
-                      {/* 텍스트는 항상 중앙 고정 */}
+                      {/* ���스트는 항상 중앙 고정 */}
                       <span className="flex items-center justify-center">매수가격 선택</span>
                       {/* 체크는 절대위치 우측 — 텍스트 위치에 영향 없음 */}
                       <AnimatePresence>
@@ -338,7 +338,7 @@ export function ScreenChat({
                       initial={{ opacity: 0, y: 16 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ type: 'spring', stiffness: 300, damping: 28, delay: 0.06 }}
-                      className="overflow-hidden rounded-2xl border border-line bg-white shadow-[0_4px_24px_-8px_rgba(35,33,54,0.14)]"
+                      className="mr-10 overflow-hidden rounded-2xl border border-line bg-white shadow-[0_4px_24px_-8px_rgba(35,33,54,0.14)]"
                     >
                       {/* 주문 내역 테이블: 배경색 없음 */}
                       <div className="divide-y divide-line/60">
@@ -384,7 +384,7 @@ export function ScreenChat({
                           transition={{ duration: 0.2 }}
                           className="relative flex-[2] rounded-2xl py-3.5 text-[15px] font-semibold shadow-sm disabled:cursor-not-allowed"
                         >
-                          {/* 텍스트는 항상 중앙 고정 */}
+                          {/* 텍스트는 ��상 중앙 고정 */}
                           <span className="flex items-center justify-center">매수 · 실행</span>
                           {/* 체크는 절대위치 우측 */}
                           <AnimatePresence>
@@ -440,7 +440,7 @@ export function ScreenChat({
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ type: 'spring', stiffness: 300, damping: 28, delay: 0.18 }}
-                  className="overflow-hidden rounded-2xl border border-line bg-white shadow-[0_4px_24px_-8px_rgba(35,33,54,0.14)]"
+                  className="mr-10 overflow-hidden rounded-2xl border border-line bg-white shadow-[0_4px_24px_-8px_rgba(35,33,54,0.14)]"
                 >
                   {/* 체크 + 타이틀 중앙 정렬 */}
                   <div className="flex flex-col items-center gap-2 px-4 pb-4 pt-6">
@@ -487,27 +487,19 @@ export function ScreenChat({
       </div>
 
       {/* ── 하단 입력 영역 ── */}
-      <div
-        className="relative shrink-0 px-4 pt-2"
-        style={{ paddingBottom: 'calc(1.5rem + env(safe-area-inset-bottom, 0px))' }}
+      {/* 하단 입력 영역 — layoutId로 home 중앙 카드와 연결 */}
+      <motion.div
+        layoutId="chat-input"
+        layout
+        animate={{
+          borderColor: focused ? 'rgba(110,93,231,0.4)' : 'rgba(236,235,242,1)',
+        }}
+        transition={{ type: 'spring', stiffness: 300, damping: 32 }}
+        className="shrink-0 rounded-t-3xl border-x border-t bg-white/95 shadow-[0_-8px_32px_-8px_rgba(35,33,54,0.12)] backdrop-blur"
+        style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
       >
-        <motion.div
-          animate={{
-            borderColor: focused ? 'rgba(110,93,231,0.55)' : 'rgba(236,235,242,1)',
-            boxShadow: focused
-              ? '0 12px 34px -14px rgba(110,93,231,0.35)'
-              : '0 10px 30px -14px rgba(35,33,54,0.18)',
-          }}
-          className="flex items-center gap-2 rounded-full border bg-white/85 py-2 pl-2 pr-2 backdrop-blur"
-        >
-          <Tappable
-            type="button"
-            aria-label="챗봇메뉴"
-            onClick={onOpenMenu}
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-ink-sub hover:bg-black/5"
-          >
-            <LayoutGrid className="h-5 w-5" strokeWidth={1.8} />
-          </Tappable>
+        {/* 1행: 텍스트 입력 */}
+        <div className="px-5 pt-5">
           <input
             type="text"
             value={value}
@@ -521,30 +513,40 @@ export function ScreenChat({
               }
             }}
             placeholder="필요한 업무를 입력해주세요"
-            className="min-w-0 flex-1 bg-transparent text-[16px] text-ink outline-none placeholder:text-ink-sub"
+            className="w-full bg-transparent text-[16px] text-ink outline-none placeholder:text-ink-sub"
           />
+        </div>
+        {/* 2행: 버튼 영역 */}
+        <div className="flex items-center justify-between px-4 pb-4 pt-3">
           <Tappable
             type="button"
-            aria-label="음성 입력"
+            aria-label="챗봇 메뉴"
+            onClick={onOpenMenu}
             className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-ink-sub hover:bg-black/5"
           >
-            <Mic className="h-5 w-5" strokeWidth={1.8} />
+            <LayoutGrid className="h-5 w-5" strokeWidth={1.8} />
           </Tappable>
-          <motion.button
-            type="button"
-            aria-label="전송"
-            onClick={send}
-            whileTap={{ scale: 0.88 }}
-            disabled={!value.trim()}
-            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-violet text-white shadow-sm hover:opacity-90 disabled:opacity-30"
-          >
-            <ArrowUp className="h-5 w-5" strokeWidth={2.4} />
-          </motion.button>
-        </motion.div>
-        <p className="mb-1 mt-2.5 text-center text-[13px] text-ink-sub">
-          AI는 실수할 수 있어요. 내용을 한 번 더 확인해 주세요.
-        </p>
-      </div>
+          <div className="flex items-center gap-2">
+            <Tappable
+              type="button"
+              aria-label="음성 입력"
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-ink-sub hover:bg-black/5"
+            >
+              <Mic className="h-5 w-5" strokeWidth={1.8} />
+            </Tappable>
+            <motion.button
+              type="button"
+              aria-label="전송"
+              onClick={send}
+              whileTap={{ scale: 0.88 }}
+              disabled={!value.trim()}
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-violet text-white shadow-sm hover:opacity-90 disabled:opacity-30"
+            >
+              <ArrowUp className="h-5 w-5" strokeWidth={2.4} />
+            </motion.button>
+          </div>
+        </div>
+      </motion.div>
     </div>
   )
 }

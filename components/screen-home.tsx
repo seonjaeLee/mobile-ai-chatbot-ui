@@ -10,10 +10,12 @@ export function ScreenHome({
   onAsk,
   onOpenMenu,
   isMobile = false,
+  isExiting = false,
 }: {
   onAsk: (q: string) => void
   onOpenMenu: () => void
   isMobile?: boolean
+  isExiting?: boolean
 }) {
   const [value, setValue] = useState('')
   const [focused, setFocused] = useState(false)
@@ -47,29 +49,38 @@ export function ScreenHome({
           hidden: {},
           show: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } },
         }}
-        className="relative flex flex-1 flex-col items-center justify-center px-6 pb-6"
+        className="relative flex flex-1 flex-col items-center justify-center px-6"
       >
-        <motion.p
-          variants={fadeUp}
-          className="mb-3 text-[15px] font-medium text-ink"
-        >
-          선재Lee님 안녕하세요.
-        </motion.p>
-        <motion.h2
-          variants={fadeUp}
-          className="mb-3 text-balance text-center text-[28px] font-bold leading-snug text-ink"
-        >
-          어떤 업무를 도와드릴까요?
-        </motion.h2>
-        <motion.p
-          variants={fadeUp}
-          className="mb-9 text-[15px] text-ink-sub"
-        >
-          AI 상담사에게 자유롭게 물어보세요.
-        </motion.p>
-
-        {/* 입력창 */}
+        {/* 텍스트 그룹 — isExiting 시 위로 fade out */}
         <motion.div
+          animate={isExiting ? { opacity: 0, y: -20 } : { opacity: 1, y: 0 }}
+          transition={{ duration: 0.22, ease: 'easeIn' }}
+          className="flex flex-col items-center"
+        >
+          <motion.p
+            variants={fadeUp}
+            className="mb-3 text-[15px] font-medium text-ink"
+          >
+            선재Lee님 안녕하세요.
+          </motion.p>
+          <motion.h2
+            variants={fadeUp}
+            className="mb-3 text-balance text-center text-[28px] font-bold leading-snug text-ink"
+          >
+            어떤 업무를 도와드릴까요?
+          </motion.h2>
+          <motion.p
+            variants={fadeUp}
+            className="mb-9 text-[15px] text-ink-sub"
+          >
+            AI 상담사에게 자유롭게 물어보세요.
+          </motion.p>
+        </motion.div>
+
+        {/* 입력창 — 중앙 카드 (layoutId로 chat 하단 입력창과 연결) */}
+        <motion.div
+          layoutId="chat-input"
+          layout
           variants={fadeUp}
           animate={{
             borderColor: focused ? 'rgba(110,93,231,0.55)' : 'rgba(236,235,242,1)',
@@ -77,27 +88,32 @@ export function ScreenHome({
               ? '0 14px 40px -12px rgba(110,93,231,0.35)'
               : '0 10px 30px -12px rgba(35,33,54,0.18)',
           }}
-          className="w-full rounded-3xl border bg-white/80 p-4 backdrop-blur"
+          transition={{ type: 'spring', stiffness: 300, damping: 32 }}
+          className="w-full rounded-3xl border bg-white/85 backdrop-blur"
         >
-          <textarea
-            rows={2}
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
-            onFocus={() => setFocused(true)}
-            onBlur={() => setFocused(false)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault()
-                send()
-              }
-            }}
-            placeholder="필요한 업무를 입력해주세요"
-            className="w-full resize-none bg-transparent text-[16px] leading-relaxed text-ink outline-none placeholder:text-ink-sub"
-          />
-          <div className="mt-2 flex items-center justify-between">
+          {/* 1행: 텍스트 입력 */}
+          <div className="px-4 pt-4">
+            <textarea
+              rows={2}
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
+              onFocus={() => setFocused(true)}
+              onBlur={() => setFocused(false)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && !e.shiftKey && !e.nativeEvent.isComposing) {
+                  e.preventDefault()
+                  send()
+                }
+              }}
+              placeholder="필요한 업무를 입력해주세요"
+              className="w-full resize-none bg-transparent text-[16px] leading-relaxed text-ink outline-none placeholder:text-ink-sub"
+            />
+          </div>
+          {/* 2행: 버튼 영역 */}
+          <div className="flex items-center justify-between px-3 pb-3 pt-2">
             <Tappable
               type="button"
-              aria-label="전체메뉴"
+              aria-label="챗봇 메뉴"
               onClick={onOpenMenu}
               className="flex h-9 w-9 items-center justify-center rounded-full text-ink-sub hover:bg-black/5"
             >
@@ -115,26 +131,24 @@ export function ScreenHome({
                 type="button"
                 aria-label="전송"
                 onClick={send}
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-violet text-white shadow-sm hover:opacity-90"
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-violet text-white shadow-sm hover:opacity-90 disabled:opacity-30"
               >
                 <ArrowUp className="h-5 w-5" strokeWidth={2.4} />
               </Tappable>
             </div>
           </div>
         </motion.div>
-
-
       </motion.div>
 
-      {/* 하단 전체메뉴 트리거 */}
+      {/* 하단 챗봇 메뉴 트리거 */}
       <div
-        className="relative flex items-center justify-center pb-7"
-        style={isMobile ? { paddingBottom: 'calc(1.75rem + env(safe-area-inset-bottom))' } : undefined}
+        className="flex shrink-0 items-center justify-center py-4"
+        style={{ paddingBottom: 'calc(1rem + env(safe-area-inset-bottom, 0px))' }}
       >
         <Tappable
           type="button"
           onClick={onOpenMenu}
-          className="flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[15px] font-medium text-ink transition-colors hover:text-ink"
+          className="flex items-center gap-1.5 rounded-full px-4 py-2 text-[15px] font-medium text-ink-sub transition-colors hover:text-ink"
         >
           <ChevronUp className="h-4 w-4" strokeWidth={2} />
           챗봇 메뉴
