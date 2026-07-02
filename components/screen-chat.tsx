@@ -208,7 +208,7 @@ export function ScreenChat({
                   initial={{ opacity: 0, y: 18 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ type: 'spring', stiffness: 300, damping: 28 }}
-                  className="overflow-hidden rounded-2xl border border-line bg-white shadow-[0_4px_24px_-8px_rgba(35,33,54,0.14)]"
+                  className="mr-10 overflow-hidden rounded-2xl border border-line bg-white shadow-[0_4px_24px_-8px_rgba(35,33,54,0.14)]"
                 >
                   {/* 종목 헤더 */}
                   <div className="border-b border-line px-4 pb-3 pt-4">
@@ -338,7 +338,7 @@ export function ScreenChat({
                       initial={{ opacity: 0, y: 16 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ type: 'spring', stiffness: 300, damping: 28, delay: 0.06 }}
-                      className="overflow-hidden rounded-2xl border border-line bg-white shadow-[0_4px_24px_-8px_rgba(35,33,54,0.14)]"
+                      className="mr-10 overflow-hidden rounded-2xl border border-line bg-white shadow-[0_4px_24px_-8px_rgba(35,33,54,0.14)]"
                     >
                       {/* 주문 내역 테이블: 배경색 없음 */}
                       <div className="divide-y divide-line/60">
