@@ -19,6 +19,7 @@ export function Prototype() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [question, setQuestion] = useState('')
   const [chatKey, setChatKey] = useState(0)
+  const [headerHasScrolled, setHeaderHasScrolled] = useState(false)
 
   const ask = useCallback((q: string) => {
     const text = q.trim()
@@ -46,9 +47,12 @@ export function Prototype() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.18 }}
-            className="fixed left-0 right-0 top-0 z-50 flex h-14 shrink-0 items-center justify-center border-b border-line/20 bg-white/60 px-4 backdrop-blur-xl"
+            className="fixed left-0 right-0 top-0 z-50 flex h-14 shrink-0 items-center justify-center border-b bg-white px-4 transition-all duration-200"
             style={{
-              boxShadow: 'inset 0 -1px 0 rgba(0,0,0,0.05), 0 8px 16px -8px rgba(0,0,0,0.08)',
+              borderColor: headerHasScrolled ? 'rgba(236,235,242,1)' : 'transparent',
+              backgroundColor: headerHasScrolled ? 'rgba(255,255,255,0.7)' : 'rgb(255,255,255)',
+              backdropFilter: headerHasScrolled ? 'blur(10px)' : 'none',
+              boxShadow: headerHasScrolled ? '0 4px 12px -4px rgba(35,33,54,0.12)' : 'none',
             }}
           >
             <Tappable
@@ -94,6 +98,7 @@ export function Prototype() {
             onBack={goHome}
             onAsk={ask}
             onOpenMenu={() => setMenuOpen(true)}
+            onScrollChange={setHeaderHasScrolled}
           />
         </motion.div>
       </div>

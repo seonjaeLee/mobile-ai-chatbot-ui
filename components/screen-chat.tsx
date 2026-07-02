@@ -50,11 +50,13 @@ export function ScreenChat({
   onBack,
   onAsk,
   onOpenMenu,
+  onScrollChange,
 }: {
   question: string
   onBack: () => void
   onAsk: (q: string) => void
   onOpenMenu: () => void
+  onScrollChange?: (hasScrolled: boolean) => void
 }) {
   // ISA 질문 여부 판단 — question에 'ISA'가 포함되면 단순 답변 모드
   const isISA = question.includes('ISA')
@@ -70,6 +72,7 @@ export function ScreenChat({
   const [value, setValue] = useState('')
   const [focused, setFocused] = useState(false)
   const [scrolling, setScrolling] = useState(false)
+  const [hasScrolled, setHasScrolled] = useState(false)
   const scrollRef = useRef<HTMLDivElement>(null)
   const scrollTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
@@ -77,6 +80,13 @@ export function ScreenChat({
     setScrolling(true)
     if (scrollTimer.current) clearTimeout(scrollTimer.current)
     scrollTimer.current = setTimeout(() => setScrolling(false), 700)
+    
+    // 헤더 효과: 스크롤 위치에 따라 동적으로
+    if (scrollRef.current) {
+      const scrolled = scrollRef.current.scrollTop > 8
+      setHasScrolled(scrolled)
+      onScrollChange?.(scrolled)
+    }
   }
 
   useEffect(() => () => { if (scrollTimer.current) clearTimeout(scrollTimer.current) }, [])
@@ -154,14 +164,6 @@ export function ScreenChat({
 
   return (
     <div className="relative flex h-full flex-col pt-14">{/* 배경은 prototype.tsx에서 공유, pt-14로 fixed 헤더 여백 확보 */}
-      {/* 헤더 아래 그래디언트 마스킹: 스크롤 콘텐츠가 지나갈 때 블러 효과 */}
-      <div
-        className="pointer-events-none absolute left-0 right-0 top-0 z-40 h-14 bg-gradient-to-b from-white/80 to-transparent backdrop-blur-sm"
-        style={{
-          background: 'linear-gradient(to bottom, rgba(255,255,255,0.85), rgba(255,255,255,0))',
-          backdropFilter: 'blur(8px)',
-        }}
-      />
 
       {/* ── 스크롤 대화 영역: pb로 입력창까지 스크롤 가능하게 ── */}
       <div
