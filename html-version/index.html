@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>삼성증권 mPOP AI 챗봇</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- 배경 (고정) -->
+    <div class="bg-aurora"></div>
+
+    <!-- 헤더 (채팅 화면에서만 표시, 고정) -->
+    <header class="chat-header hidden" id="chatHeader">
+      <button class="header-close-btn" id="closeBtn">✕</button>
+      <h1>삼성증권mPOP AI챗봇</h1>
+    </header>
+
+    <!-- 콘텐츠 영역 -->
+    <div class="content-wrapper">
+      <!-- 홈 화면 -->
+      <div class="screen home-screen active" id="homeScreen">
+        <div class="home-header">
+          <button class="home-close-btn">✕</button>
+          <h1>삼성증권mPOP AI챗봇</h1>
+        </div>
+
+        <div class="home-center">
+          <div class="welcome-text fade-in" style="animation-delay: 0.05s">
+            <p class="greeting">선재Lee님 안녕하세요.</p>
+            <h2 class="main-question">어떤 업무를 도와드릴까요?</h2>
+            <p class="sub-text">AI 상담사에게 자유롭게 물어보세요.</p>
+          </div>
+
+          <!-- 입력 카드 -->
+          <div class="input-card fade-in" style="animation-delay: 0.12s">
+            <textarea 
+              id="homeInput" 
+              rows="2" 
+              placeholder="질문을 입력해주세요"
+              class="input-textarea"
+            ></textarea>
+            <div class="input-actions">
+              <button class="icon-btn" title="보이스">🎤</button>
+              <button class="icon-btn" title="메뉴">⊞</button>
+              <button class="send-btn" id="homeSendBtn">↑</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 챗봇 메뉴 트리거 -->
+        <div class="menu-trigger" id="menuTrigger">
+          <span>∧ 챗봇 메뉴</span>
+        </div>
+      </div>
+
+      <!-- 채팅 화면 -->
+      <div class="screen chat-screen" id="chatScreen">
+        <div class="chat-scroll" id="chatScroll">
+          <!-- 메시지들이 여기에 추가됨 -->
+        </div>
+
+        <!-- 입력 영역 (하단 고정) -->
+        <div class="chat-input-area">
+          <textarea 
+            id="chatInput" 
+            rows="2" 
+            placeholder="메시지를 입력해주세요"
+            class="input-textarea"
+          ></textarea>
+          <div class="input-actions">
+            <button class="icon-btn" title="보이스">🎤</button>
+            <button class="send-btn" id="chatSendBtn">↑</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
