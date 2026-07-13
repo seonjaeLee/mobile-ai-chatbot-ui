@@ -69,7 +69,6 @@ const chatThread = $('chat-thread')
 const chatInputBar = $('chat-input-bar')
 const homeTextarea = $('home-textarea')
 const homeInputCard = $('home-input-card')
-const homeGreeting = $('home-greeting')
 const homeSend = $('home-send')
 const chatInput = $('chat-input')
 const chatSend = $('chat-send')
@@ -94,7 +93,6 @@ function goHome() {
   screenChat.classList.remove('is-active')
   screenHome.classList.add('is-active')
   chatHeader.setAttribute('hidden', '')
-  homeGreeting.classList.remove('is-exiting')
   homeTextarea.value = ''
 }
 
@@ -112,8 +110,7 @@ function startChat(question) {
   chatInput.value = ''
   chatHeader.classList.remove('is-scrolled')
 
-  // 홈 인사말 페이드아웃 후 화면 전환
-  homeGreeting.classList.add('is-exiting')
+  // 화면 전환
   screenHome.classList.remove('is-active')
   screenChat.classList.add('is-active')
   chatHeader.removeAttribute('hidden')
