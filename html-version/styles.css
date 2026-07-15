@@ -476,15 +476,11 @@ button {
   font-weight: 500;
   color: var(--ink-sub);
 }
-.diff-tag {
-  display: flex;
-  align-items: center;
-  gap: 2px;
+.qty-tag {
   font-size: 14px;
   font-weight: 600;
+  color: var(--ink);
 }
-.diff-tag.up { color: var(--quote-up); }
-.diff-tag.down { color: var(--quote-down); }
 .order-row:disabled { cursor: not-allowed; }
 
 /* 카드 하단 버튼 영역 */

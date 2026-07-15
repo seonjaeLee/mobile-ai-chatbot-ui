@@ -17,11 +17,11 @@ import { Tappable } from './tappable'
 const STOCK = { name: '삼성전자', code: '005930', market: 'KOSPi' }
 const BASE_PRICE = 192600
 const ORDER_BOOK = [
-  { price: 192800, diff: +200 },
-  { price: 192700, diff: +100 },
-  { price: 192600, diff: 0 },
-  { price: 192500, diff: -100 },
-  { price: 192400, diff: -200 },
+  { price: 192800, availableQty: 45 },
+  { price: 192700, availableQty: 62 },
+  { price: 192600, availableQty: 0 }, // 현재가
+  { price: 192500, availableQty: 38 },
+  { price: 192400, availableQty: 71 },
 ]
 const QTY = 15
 const ORDER_NO = 'B20260627-0381'
@@ -236,7 +236,7 @@ export function ScreenChat({
                   <div className="divide-y divide-line/60">
                     {ORDER_BOOK.map((row) => {
                       const isSelected = selectedPrice === row.price
-                      const isCurrent = row.diff === 0
+                      const isCurrent = row.availableQty === 0
                       return (
                         <Tappable
                           key={row.price}
@@ -258,13 +258,9 @@ export function ScreenChat({
                                 현재가
                               </span>
                             )}
-                            {row.diff !== 0 && (
-                              <span className={`flex items-center gap-0.5 text-[14px] font-semibold ${row.diff > 0 ? 'text-quote-up' : 'text-quote-down'}`}>
-                                {row.diff > 0
-                                  ? <ChevronUp className="h-3.5 w-3.5" strokeWidth={2.5} />
-                                  : <ChevronDown className="h-3.5 w-3.5" strokeWidth={2.5} />
-                                }
-                                {Math.abs(row.diff).toLocaleString()}
+                            {row.availableQty > 0 && (
+                              <span className="text-[14px] font-semibold text-ink">
+                                {row.availableQty}주
                               </span>
                             )}
                           </div>
@@ -394,7 +390,7 @@ export function ScreenChat({
                           transition={{ duration: 0.2 }}
                           className="relative flex-[2] rounded-2xl py-3.5 text-[15px] font-semibold shadow-sm disabled:cursor-not-allowed"
                         >
-                          {/* 텍스트는 ��상 중앙 고정 */}
+                          {/* 텍스트는 ��상 중앙 고��� */}
                           <span className="flex items-center justify-center">매수 · 실행</span>
                           {/* 체크는 절대위치 우측 */}
                           <AnimatePresence>

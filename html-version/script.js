@@ -6,11 +6,11 @@
 const STOCK = { name: '삼성전자', code: '005930', market: 'KOSPi' }
 const BASE_PRICE = 192600
 const ORDER_BOOK = [
-  { price: 192800, diff: +200 },
-  { price: 192700, diff: +100 },
-  { price: 192600, diff: 0 },
-  { price: 192500, diff: -100 },
-  { price: 192400, diff: -200 },
+  { price: 192800, availableQty: 45 },
+  { price: 192700, availableQty: 62 },
+  { price: 192600, availableQty: 0 }, // 현재가
+  { price: 192500, availableQty: 38 },
+  { price: 192400, availableQty: 71 },
 ]
 const QTY = 15
 const ORDER_NO = 'B20260627-0381'
@@ -158,7 +158,7 @@ function typeStage4() {
   })
 }
 
-// ═══════════════════════════════════════════════════════════════
+// ═��═════════════════════════════════════════════════════════════
 // 렌더링
 // ═══════════════════════════════════════════════════════════════
 function scrollToBottom() {
@@ -222,11 +222,11 @@ function buildOrderBookCard() {
   card.id = 'orderbook-card'
 
   const rows = ORDER_BOOK.map((row) => {
-    const isCurrent = row.diff === 0
+    const isCurrent = row.availableQty === 0
     let right = ''
     if (isCurrent) right += '<span class="badge-current">현재가</span>'
-    if (row.diff !== 0) {
-      right += `<span class="diff-tag ${row.diff > 0 ? 'up' : 'down'}">${row.diff > 0 ? ICON.chevronUp : ICON.chevronDown}${won(Math.abs(row.diff))}</span>`
+    if (row.availableQty > 0) {
+      right += `<span class="qty-tag">${row.availableQty}주</span>`
     }
     return `<button type="button" class="order-row" data-price="${row.price}">
       <span class="price">${won(row.price)}</span>
