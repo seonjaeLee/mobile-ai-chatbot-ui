@@ -36,7 +36,7 @@ export function ScreenHome({
         >
           <X className="h-[22px] w-[22px]" strokeWidth={2} />
         </Tappable>
-        <h1 className="text-[17px] font-semibold text-ink">삼성증권mPOP AI챗봇</h1>
+        <h1 className="text-[17px] font-semibold text-ink">삼성증권 mPOP AI챗봇</h1>
       </header>
 
       {/* 중앙 영역 */}
@@ -55,24 +55,12 @@ export function ScreenHome({
           transition={{ duration: 0.22, ease: 'easeIn' }}
           className="flex flex-col items-center"
         >
-          <motion.p
-            variants={fadeUp}
-            className="mb-3 text-[15px] font-medium text-ink"
-          >
-            선재Lee님 안녕하세요.
-          </motion.p>
           <motion.h2
             variants={fadeUp}
-            className="mb-3 text-balance text-center text-[28px] font-bold leading-snug text-ink"
+            className="mb-7 text-balance text-center text-[28px] font-bold leading-snug text-ink"
           >
             어떤 업무를 도와드릴까요?
           </motion.h2>
-          <motion.p
-            variants={fadeUp}
-            className="mb-7 text-[15px] text-ink-sub"
-          >
-            AI 상담사에게 자유롭게 물어보세요.
-          </motion.p>
         </motion.div>
 
         {/* 입력창 — 중앙 카드 */}

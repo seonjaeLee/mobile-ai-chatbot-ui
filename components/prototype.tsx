@@ -58,7 +58,7 @@ export function Prototype() {
             >
               <X className="h-6 w-6" strokeWidth={2} />
             </Tappable>
-            <h1 className="text-[17px] font-semibold text-ink">삼성증권mPOP AI챗봇</h1>
+            <h1 className="text-[17px] font-semibold text-ink">삼성증권 mPOP AI챗봇</h1>
           </motion.div>
         )}
       </AnimatePresence>
