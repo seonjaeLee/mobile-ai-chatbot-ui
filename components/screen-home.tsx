@@ -57,7 +57,7 @@ export function ScreenHome({
         >
           <motion.h2
             variants={fadeUp}
-            className="mb-7 text-balance text-center text-[28px] font-bold leading-snug text-ink"
+            className="mb-7 text-balance text-center text-[24px] font-bold leading-snug text-ink"
           >
             어떤 업무를 도와드릴까요?
           </motion.h2>
