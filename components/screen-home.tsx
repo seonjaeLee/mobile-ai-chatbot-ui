@@ -59,7 +59,7 @@ export function ScreenHome({
             variants={fadeUp}
             className="mb-7 text-balance text-center text-[24px] font-bold leading-snug text-ink"
           >
-            어떤 업무를 도와드릴까요?
+            어떤 업무를<br />도와드릴까요?
           </motion.h2>
         </motion.div>
 
