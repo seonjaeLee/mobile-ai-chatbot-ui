@@ -226,7 +226,7 @@ function buildOrderBookCard() {
     let right = ''
     if (isCurrent) right += '<span class="badge-current">현재가</span>'
     if (row.availableQty > 0) {
-      right += `<span class="qty-tag">${row.availableQty}주</span>`
+      right += `<span class="qty-tag">${row.availableQty}</span>`
     }
     return `<button type="button" class="order-row" data-price="${row.price}">
       <span class="price">${won(row.price)}</span>

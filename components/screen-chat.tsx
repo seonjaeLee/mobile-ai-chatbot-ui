@@ -260,7 +260,7 @@ export function ScreenChat({
                             )}
                             {row.availableQty > 0 && (
                               <span className="text-[14px] font-semibold text-ink">
-                                {row.availableQty}주
+                                {row.availableQty}
                               </span>
                             )}
                           </div>
